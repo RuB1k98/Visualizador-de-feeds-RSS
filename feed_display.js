@@ -115,6 +115,7 @@ async function displayFeed(data, feedTitle, category, url) {
         console.error('Error displaying RSS feed:', error);
     }
 }
+
 // Función para crear una tarjeta para cada elemento del feed
 function createCard(item, category) {
     // Crea un nuevo elemento div para la tarjeta
@@ -157,6 +158,7 @@ function createCard(item, category) {
             <div class="card-background" ${imageUrl ? `style="background-image: url('${imageUrl}');"` : ''}></div>
             <div class="card-content">
                 <h3>${item.title}</h3>
+                ${item.title.length < 50 ? `<p>${description}</p>` : ''}
                 <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="read-more">Leer más</a>
             </div>
         `;

@@ -96,7 +96,7 @@ function mouseMoveHandler(e, container) {
         const distanceY = (lastY - y);
         velocityY = distanceY / timeDiffInSeconds;
     }
-    console.log(velocityY)
+    
     lastTimeX = currentTime;
     lastX = x;
     lastTimeY = currentTime;
