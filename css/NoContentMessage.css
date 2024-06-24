@@ -1,0 +1,33 @@
+:root {
+    --scale-factor: 2; /* Ajusta este valor para cambiar el tamaño general */
+}
+
+.no-content-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(300px * var(--scale-factor));
+    width: 100%;
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    padding: calc(20px * var(--scale-factor));
+    box-sizing: border-box;
+}
+
+.no-content-message img {
+    max-width: calc(200px * var(--scale-factor));
+    width: 80%;
+    margin-bottom: calc(20px * var(--scale-factor));
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.no-content-message p {
+    font-size: calc(24px * var(--scale-factor));
+    text-align: center;
+    margin: 0;
+    font-weight: 600;
+}

@@ -40,14 +40,25 @@ function saveFeed() {
 function filterFeeds() {
     const selectedCategories = Array.from(document.querySelectorAll('#categoryFilters input:checked:not(#selectAll)')).map(input => input.value);
     const feedSections = document.querySelectorAll('.feed-section');
+    let visibleSections = 0;
+
     feedSections.forEach(section => {
         const category = section.getAttribute('data-category');
         if (selectedCategories.includes(category)) {
             section.style.display = '';
+            visibleSections++;
         } else {
             section.style.display = 'none';
         }
     });
+    
+    // Mostrar u ocultar el mensaje "Aquí no hay nada"
+    const noContentMessage = document.getElementById('noContentMessage');
+    if (visibleSections === 0) {
+        noContentMessage.style.display = 'block';
+    } else {
+        noContentMessage.style.display = 'none';
+    }
     
     // Actualizar el estado del checkbox "Seleccionar todo"
     const selectAllCheckbox = document.getElementById('selectAll');

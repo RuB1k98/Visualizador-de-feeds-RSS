@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="css/feed.css">
     <link rel="stylesheet" href="css/podcastsidebar.css">
     <link rel="stylesheet" href="css/responsive.css">
-    
+    <link rel="stylesheet" href="css/NoContentMessage.css">
     <script src="darkmode/darkmode.js"></script>
     <script src="export_import.js"></script>
     <script src="ui_utils.js"></script>
@@ -43,6 +43,12 @@
             <div id="errorMessage" class="error-message"></div>
             <div class="content-wrapper">
                 <div id="feedsContainer"></div>
+
+                <div id="noContentMessage" style="display: none;" class="no-content-message">
+                    <img src="GatoCarga.gif" alt="GatoCarga">
+                    <p>Aquí no hay nada</p>
+                </div>
+
                 <aside id="podcastSidebar">
                     <h2>Podcasts</h2>
                     <div id="podcastContainer"></div>
