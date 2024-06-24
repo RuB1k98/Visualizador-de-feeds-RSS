@@ -1,5 +1,5 @@
 function exportFeeds() {
-    const filename = 'rssFeeds.json';
+    const filename = 'FeedsList.json';
     const json = JSON.stringify(feeds, null, 2);
     const blob = new Blob([json], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
