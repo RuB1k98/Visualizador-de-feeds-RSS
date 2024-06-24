@@ -29,5 +29,12 @@
     font-size: calc(24px * var(--scale-factor));
     text-align: center;
     margin: 0;
+    margin-bottom: calc(10px * var(--scale-factor));
     font-weight: 600;
+}
+
+.no-content-message .subtext {
+    font-size: calc(16px * var(--scale-factor));
+    color: #666;
+    margin-bottom: 0;
 }
