@@ -39,3 +39,9 @@
 #podcastContainer .card-content .read-more {
     font-size: 14px;
 }
+
+#podcastContainer .card img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+}
