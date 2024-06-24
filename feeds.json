@@ -1,0 +1,52 @@
+[
+    {
+      "url": "https://www.perfil.com/feed",
+      "title": "Perfil",
+      "category": "Noticias"
+    },
+    {
+      "url": "https://www.ambito.com/rss/pages/home.xml",
+      "title": "Nuevo Feed3",
+      "category": "No se"
+    },
+    {
+      "url": "https://www.infobae.com/feeds/rss/",
+      "title": "infobae",
+      "category": "infobae"
+    },
+    {
+      "url": "https://www.ellitoral.com.ar/rss/",
+      "title": "Nuevo Feed2",
+      "category": ""
+    },
+    {
+      "url": "https://cenital.com/feed/",
+      "title": "Cenital",
+      "category": "Cenital"
+    },
+    {
+      "url": "https://www.hltv.org/rss/news",
+      "title": "HLTV",
+      "category": "Counter Strike"
+    },
+    {
+      "url": "https://anchor.fm/s/577fca7c/podcast/rss",
+      "title": "El Futuro",
+      "category": "Podcast"
+    },
+    {
+      "url": "https://anchor.fm/s/7e239f14/podcast/rss",
+      "title": "Peor caso",
+      "category": "Podcast"
+    },
+    {
+      "url": "https://www.revistaanfibia.com/feed/",
+      "title": "Anfibia",
+      "category": "Revista anfibia"
+    },
+    {
+      "url": "https://podcast.revistaanfibia.com/feed/",
+      "title": "Anfibia podcasts",
+      "category": "Anfibia"
+    }
+  ]
