@@ -42,7 +42,7 @@ function filterFeeds() {
     const feedSections = document.querySelectorAll('.feed-section');
     feedSections.forEach(section => {
         const category = section.getAttribute('data-category');
-        if (selectedCategories.length === 0 || selectedCategories.includes(category)) {
+        if (selectedCategories.includes(category)) {
             section.style.display = '';
         } else {
             section.style.display = 'none';
