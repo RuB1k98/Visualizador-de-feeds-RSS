@@ -46,19 +46,33 @@ function displayFeedError(errorMessage, url) {
     }
 }
 
+// Función para añadir event listeners de arrastre a un elemento
+function addDragEventListeners(element) {
+    element.addEventListener('mousedown', (e) => mouseDownHandler(e, element));
+    element.addEventListener('mouseleave', () => mouseLeaveHandler(element));
+    element.addEventListener('mouseup', () => mouseUpHandler(element));
+    element.addEventListener('mousemove', (e) => mouseMoveHandler(e, element));
+}
+
 // Función asíncrona para mostrar el feed
 async function displayFeed(data, feedTitle, category, url) {
+    // Obtener los contenedores principales
     const feedsContainer = document.getElementById('feedsContainer');
     const podcastContainer = document.getElementById('podcastContainer');
+    
+    // Crear un nuevo contenedor para el contenido del feed
     const feedContent = document.createElement('div');
     feedContent.className = 'feed-content';
 
     try {
+        // Verificar si hay elementos en el feed
         if (data.items && data.items.length > 0) {
+            // Iterar sobre los elementos del feed
             for (let i = 0; i < data.items.length; i++) {
                 const item = data.items[i];
                 const card = createCard(item, category);
 
+                // Colocar el primer podcast en el contenedor de podcasts, los demás en el contenido general
                 if (category.toLowerCase() === 'podcast' && i === 0) {
                     podcastContainer.appendChild(card);
                 } else if (category.toLowerCase() !== 'podcast') {
@@ -66,41 +80,41 @@ async function displayFeed(data, feedTitle, category, url) {
                 }
             }
         } else {
+            // Mostrar un mensaje de error si no hay artículos disponibles
             const errorMessage = `El feed "${feedTitle}" no tiene artículos disponibles.`;
             displayFeedError(errorMessage, url);
             return;
         }
 
-
-        // Si no es un podcast, crea una nueva sección para el feed
-        if (category.toLowerCase() !== 'podcast') {
+        // Manejar la visualización según la categoría
+        if (category.toLowerCase() === 'podcast') {
+            // Añadir event listeners de arrastre al contenedor de podcasts
+            addDragEventListeners(podcastContainer);
+        } else {
+            // Crear una nueva sección para el feed que no es podcast
             const feedSection = document.createElement('section');
             feedSection.className = 'feed-section';
             feedSection.setAttribute('data-category', category);
             
-            // Añade el título del feed y la categoría
+            // Añadir el título del feed y la categoría
             feedSection.innerHTML = `
                 <h2 class="feed-title">${feedTitle}${category ? ` <span class="feed-category">(${category})</span>` : ''}</h2>
             `;
             
-            // Añade el contenido del feed a la sección y la sección al contenedor de feeds
+            // Añadir el contenido del feed a la sección y la sección al contenedor de feeds
             feedSection.appendChild(feedContent);
             feedsContainer.appendChild(feedSection);
             
-            // Añade eventos de arrastre al contenido del feed
-            feedContent.addEventListener('mousedown', (e) => mouseDownHandler(e, feedContent));
-            feedContent.addEventListener('mouseleave', () => mouseLeaveHandler(feedContent));
-            feedContent.addEventListener('mouseup', () => mouseUpHandler(feedContent));
-            feedContent.addEventListener('mousemove', (e) => mouseMoveHandler(e, feedContent));
+            // Añadir event listeners de arrastre al contenido del feed
+            addDragEventListeners(feedContent);
         }
     } catch (error) {
-        // Si hay un error, muestra un mensaje de error y lo registra en la consola
+        // Manejar errores durante la visualización del feed
         const errorMessage = `Error mostrando el feed "${feedTitle}". Por favor, inténtelo nuevamente.`;
         displayFeedError(errorMessage, url);
         console.error('Error displaying RSS feed:', error);
     }
 }
-
 // Función para crear una tarjeta para cada elemento del feed
 function createCard(item, category) {
     // Crea un nuevo elemento div para la tarjeta
