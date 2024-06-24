@@ -17,7 +17,7 @@ async function fetchFeed(url, title, category) {
         // Llama a la función para mostrar el feed
         displayFeed(data, title, category, url);
     } catch (error) {
-        // Si hay un error, muestra un mensaje de error y lo registra en la consola
+                // Si hay un error, muestra un mensaje de error y lo registra en la consola
         const errorMessage = `Error cargando el feed "${title}". Por favor, inténtelo nuevamente.`;
         displayFeedError(errorMessage, url);
         console.error('Error fetching RSS feed:', error);
@@ -56,57 +56,16 @@ function addDragEventListeners(element) {
 
 // Función asíncrona para mostrar el feed
 async function displayFeed(data, feedTitle, category, url) {
-    // Obtener los contenedores principales
-    const feedsContainer = document.getElementById('feedsContainer');
-    const podcastContainer = document.getElementById('podcastContainer');
-    
-    // Crear un nuevo contenedor para el contenido del feed
-    const feedContent = document.createElement('div');
-    feedContent.className = 'feed-content';
-
     try {
-        // Verificar si hay elementos en el feed
         if (data.items && data.items.length > 0) {
-            // Iterar sobre los elementos del feed
-            for (let i = 0; i < data.items.length; i++) {
-                const item = data.items[i];
-                const card = createCard(item, category);
-
-                // Colocar el primer podcast en el contenedor de podcasts, los demás en el contenido general
-                if (category.toLowerCase() === 'podcast' && i === 0) {
-                    podcastContainer.appendChild(card);
-                } else if (category.toLowerCase() !== 'podcast') {
-                    feedContent.appendChild(card);
-                }
+            if (category.toLowerCase() === 'podcast') {
+                displayFeedPodcast(data, feedTitle, url);
+            } else {
+                displayFeedCentral(data, feedTitle, category, url);
             }
         } else {
-            // Mostrar un mensaje de error si no hay artículos disponibles
             const errorMessage = `El feed "${feedTitle}" no tiene artículos disponibles.`;
             displayFeedError(errorMessage, url);
-            return;
-        }
-
-        // Manejar la visualización según la categoría
-        if (category.toLowerCase() === 'podcast') {
-            // Añadir event listeners de arrastre al contenedor de podcasts
-            addDragEventListeners(podcastContainer);
-        } else {
-            // Crear una nueva sección para el feed que no es podcast
-            const feedSection = document.createElement('section');
-            feedSection.className = 'feed-section';
-            feedSection.setAttribute('data-category', category);
-            
-            // Añadir el título del feed y la categoría
-            feedSection.innerHTML = `
-                <h2 class="feed-title">${feedTitle}${category ? ` <span class="feed-category">(${category})</span>` : ''}</h2>
-            `;
-            
-            // Añadir el contenido del feed a la sección y la sección al contenedor de feeds
-            feedSection.appendChild(feedContent);
-            feedsContainer.appendChild(feedSection);
-            
-            // Añadir event listeners de arrastre al contenido del feed
-            addDragEventListeners(feedContent);
         }
     } catch (error) {
         // Manejar errores durante la visualización del feed
@@ -114,6 +73,43 @@ async function displayFeed(data, feedTitle, category, url) {
         displayFeedError(errorMessage, url);
         console.error('Error displaying RSS feed:', error);
     }
+}
+
+// Nueva función para mostrar feeds centrales
+function displayFeedCentral(data, feedTitle, category, url) {
+    const feedsContainer = document.getElementById('feedsContainer');
+    const feedContent = document.createElement('div');
+    feedContent.className = 'feed-content';
+
+    for (const item of data.items) {
+        const card = createCard(item, category);
+        feedContent.appendChild(card);
+    }
+
+    const feedSection = document.createElement('section');
+    feedSection.className = 'feed-section';
+    feedSection.setAttribute('data-category', category);
+    
+    feedSection.innerHTML = `
+        <h2 class="feed-title">${feedTitle}${category ? ` <span class="feed-category">(${category})</span>` : ''}</h2>
+    `;
+    
+    feedSection.appendChild(feedContent);
+    feedsContainer.appendChild(feedSection);
+    
+    addDragEventListeners(feedContent);
+}
+
+// Nueva función para mostrar feeds de podcast
+function displayFeedPodcast(data, feedTitle, url) {
+    const podcastContainer = document.getElementById('podcastContainer');
+    
+    if (data.items.length > 0) {
+        const card = createCard(data.items[0], 'podcast');
+        podcastContainer.appendChild(card);
+    }
+
+    addDragEventListeners(podcastContainer);
 }
 
 // Función para crear una tarjeta para cada elemento del feed
