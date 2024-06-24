@@ -1,0 +1,313 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2c3e50;
+    --background-color: #ecf0f1;
+    --card-background: #ffffff;
+    --text-color: #333333;
+    --card-background-rgb: 255, 255, 255;
+}
+
+/* Dark mode variables */
+.dark-mode {
+    --primary-color: #2980b9;
+    --secondary-color: #34495e;
+    --background-color: #2c3e50;
+    --card-background: #34495e;
+    --text-color: #ecf0f1;
+    --card-background-rgb: 52, 73, 94;
+}
+
+/* Global styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Container styles */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header styles */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px 0;
+    margin-bottom: 30px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.5em;
+    text-align: center;
+}
+
+/* Input group styles */
+.input-group {
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+#feedInput, #categoryInput {
+    width: 30%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+}
+
+#feedInput {
+    border-radius: 4px 0 0 4px;
+}
+
+#categoryInput {
+    border-radius: 0;
+    border-left: none;
+}
+
+/* Button styles */
+button {
+    padding: 10px 20px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+    border-radius: 0 4px 4px 0;
+}
+
+button:hover {
+    background-color: #34495e;
+}
+
+/* Feed section styles */
+.feed-section {
+    margin-bottom: 40px;
+}
+
+.feed-title {
+    font-size: 1.5em;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.feed-category {
+    font-size: 0.8em;
+    color: var(--text-color);
+    font-weight: normal;
+}
+
+/* Feed content styles */
+.feed-content {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    scroll-snap-type: none;
+}
+
+.feed-content.active {
+    cursor: grabbing;
+}
+
+/* Card styles */
+.card {
+    flex: 0 0 300px;
+    margin-right: 20px;
+    background-color: var(--card-background);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    scroll-snap-align: start;
+    position: relative;
+    min-width: 200px;
+    flex-shrink: 0;
+    cursor: grab;
+    user-select: none;
+    display: flex;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
+}
+
+.card-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+    transition: opacity 0.3s;
+}
+
+.card:hover .card-background {
+    opacity: 0.85;
+}
+
+.card-content {
+    position: relative;
+    padding: 15px;
+    background-color: rgba(var(--card-background-rgb), 0.8);
+    height: 100%;
+}
+
+.card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.card h3 {
+    margin-top: 0;
+    font-size: 1.1em;
+    color: var(--text-color);
+}
+
+.card p {
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.card a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Feed list styles */
+#feedList {
+    margin-top: 40px;
+    background-color: var(--card-background);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#feedList h2 {
+    color: var(--text-color);
+    margin-top: 0;
+}
+
+/* Feed item styles */
+.feedItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.feedItem:last-child {
+    border-bottom: none;
+}
+
+.feed-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.feedItem button {
+    padding: 5px 10px;
+    font-size: 0.8em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.feedItem button:first-child {
+    background-color: var(--primary-color);
+}
+
+.feedItem button:first-child:hover {
+    background-color: #2980b9;
+}
+
+.feedItem button:last-child {
+    background-color: #e74c3c;
+}
+
+.feedItem button:last-child:hover {
+    background-color: #c0392b;
+}
+
+/* Footer styles */
+footer {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+}
+
+/* Loader styles */
+.loader {
+    border: 5px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 5px solid var(--primary-color);
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error message styles */
+.error-message {
+    color: red;
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Dark mode toggle button */
+#darkModeToggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 5px 10px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Category filters */
+.category-filters {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.category-filters span {
+    font-size: 1.3em;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.category-filters input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.category-filters label {
+    margin-right: 15px;
+    cursor: pointer;
+}

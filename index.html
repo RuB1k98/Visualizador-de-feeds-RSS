@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizador de RSS</title>
+    <link rel="icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Visualizador de RSS</h1>
+            <button id="darkModeToggle">Cambiar modo</button>
+        </div>
+    </header>
+    <main class="container">
+        <div id="categoryFilters" class="category-filters">
+            <span>categorias:</span>
+            <!-- Category checkboxes will be dynamically added here -->
+        </div>
+        <div id="loader" class="loader" style="display: none;"></div>
+        <div id="errorMessage" class="error-message"></div>
+        <div id="feedsContainer"></div>
+    </main>
+    <div class="container">
+        <div id="feedList">
+            <h2>Feeds cargados</h2>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 20px;">
+        <div class="input-group">
+            <input type="text" id="feedInput" placeholder="Ingrese URL del feed RSS">
+            <input type="text" id="categoryInput" placeholder="Categoría (opcional)">
+            <button onclick="addFeed()">Agregar Feed</button>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Visualizador de RSS. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="darkMode.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
