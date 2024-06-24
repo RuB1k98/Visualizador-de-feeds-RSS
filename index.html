@@ -10,7 +10,13 @@
 
     <script src="darkMode.js"></script>
     <script src="export_import.js"></script>
+    <script src="ui_utils.js"></script>
+    <script src="drag_scroll.js"></script>
+    <script src="feed_display.js"></script>
+    <script src="feed_management.js"></script>
     <script src="main.js"></script>
+
+
 </head>
 <body>
     <header>
@@ -19,14 +25,22 @@
             <button id="darkModeToggle">Cambiar modo</button>
         </div>
     </header>
-    <main class="container">
-        <div id="categoryFilters" class="category-filters">
-            <span>categorias:</span>
-            <!-- Category checkboxes will be dynamically added here -->
+    <main>
+        <div class="container">
+            <div id="categoryFilters" class="category-filters">
+                <span>categorias:</span>
+                <!-- Category checkboxes will be dynamically added here -->
+            </div>
+            <div id="loader" class="loader" style="display: none;"></div>
+            <div id="errorMessage" class="error-message"></div>
+            <div class="content-wrapper">
+                <div id="feedsContainer"></div>
+                <aside id="podcastSidebar">
+                    <h2>Podcasts</h2>
+                    <div id="podcastContainer"></div>
+                </aside>
+            </div>
         </div>
-        <div id="loader" class="loader" style="display: none;"></div>
-        <div id="errorMessage" class="error-message"></div>
-        <div id="feedsContainer"></div>
     </main>
     <div class="container">
         <div id="feedList">

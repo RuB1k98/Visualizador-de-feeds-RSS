@@ -311,3 +311,145 @@ footer {
     margin-right: 15px;
     cursor: pointer;
 }
+
+/* Estilos existentes... */
+
+.content-wrapper {
+    display: flex;
+    gap: 20px;
+}
+
+#feedsContainer {
+    flex: 1;
+}
+
+#podcastSidebar {
+    width: 300px;
+    padding: 20px;
+    background-color: var(--card-background);
+    border-radius: 5px;
+}
+
+#podcastContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#podcastContainer .card {
+    width: 100%;
+}
+
+/* Ajusta los estilos de las tarjetas para que se vean bien en la barra lateral */
+#podcastContainer .card-content {
+    padding: 10px;
+}
+
+#podcastContainer .card-content h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+#podcastContainer .card-content p {
+    font-size: 14px;
+}
+
+#podcastContainer .card-content .read-more {
+    font-size: 14px;
+}
+
+/* Ajusta el diseño responsivo */
+@media (max-width: 768px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+
+    #podcastSidebar {
+        width: 100%;
+    }
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Previene el scroll horizontal */
+}
+
+.container {
+    max-width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.content-wrapper {
+    display: flex;
+    gap: 20px;
+    max-width: 100%;
+    overflow: hidden; /* Asegura que el contenido no desborde */
+}
+
+#feedsContainer {
+    flex: 1;
+    min-width: 0; /* Permite que el contenedor se encoja si es necesario */
+}
+
+#podcastSidebar {
+    width: 300px;
+    flex-shrink: 0; /* Evita que la barra lateral se encoja */
+    padding: 20px;
+    background-color: var(--card-background);
+    border-radius: 5px;
+    overflow-y: auto; /* Permite scroll vertical si es necesario */
+    max-height: calc(100vh - 100px); /* Ajusta según sea necesario */
+}
+
+.feed-content {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 20px;
+    padding-bottom: 20px; /* Espacio para la barra de scroll */
+}
+
+.card {
+    flex: 0 0 auto;
+    width: 300px; /* O el ancho que prefieras */
+    max-width: 100%;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 1200px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+
+    #podcastSidebar {
+        width: 100%;
+        max-height: none;
+    }
+
+    #podcastContainer {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    #podcastContainer .card {
+        width: calc(50% - 10px); /* 2 columnas en tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    .feed-content {
+        flex-direction: column;
+    }
+
+    .card {
+        width: 100%;
+    }
+
+    #podcastContainer .card {
+        width: 100%; /* 1 columna en móviles */
+    }
+}
+
