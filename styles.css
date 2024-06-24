@@ -89,8 +89,9 @@ button:hover {
 }
 
 /* Feed section styles */
-.feed-section {
+.feed-section { /* esto son los recuadros de cada feed completo el margen izquierda esta aca */
     margin-bottom: 40px;
+    margin-left: 300px; 
 }
 
 .feed-title {
