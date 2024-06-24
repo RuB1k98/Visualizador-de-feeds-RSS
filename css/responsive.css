@@ -1,0 +1,35 @@
+/* Responsive styles */
+@media (max-width: 1200px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+
+    #podcastSidebar {
+        width: 100%;
+        max-height: none;
+    }
+
+    #podcastContainer {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    #podcastContainer .card {
+        width: calc(50% - 10px); /* 2 columns on tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    .feed-content {
+        flex-direction: column;
+    }
+
+    .card {
+        width: 100%;
+    }
+
+    #podcastContainer .card {
+        width: 100%; /* 1 column on mobile */
+    }
+}

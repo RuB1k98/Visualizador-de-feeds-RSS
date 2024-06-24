@@ -1,0 +1,61 @@
+/* Input group styles */
+.input-group {
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+#feedInput, #categoryInput {
+    width: 30%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+}
+
+#feedInput {
+    border-radius: 4px 0 0 4px;
+}
+
+#categoryInput {
+    border-radius: 0;
+    border-left: none;
+}
+
+/* Button styles */
+button {
+    padding: 10px 20px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+    border-radius: 0 4px 4px 0;
+}
+
+button:hover {
+    background-color: #34495e;
+}
+
+/* Category filters */
+.category-filters {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.category-filters span {
+    font-size: 1.3em;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.category-filters input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.category-filters label {
+    margin-right: 15px;
+    cursor: pointer;
+}

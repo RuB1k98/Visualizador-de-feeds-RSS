@@ -1,0 +1,158 @@
+/* Feed section styles */
+.feed-section {
+    margin-bottom: 40px;
+    margin-left: 300px;
+}
+
+.feed-title {
+    font-size: 1.5em;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.feed-category {
+    font-size: 0.8em;
+    color: var(--text-color);
+    font-weight: normal;
+}
+
+/* Feed content styles */
+.feed-content {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    scroll-snap-type: none;
+    gap: 20px;
+}
+
+.feed-content.active {
+    cursor: grabbing;
+}
+
+/* Card styles */
+.card {
+    flex: 0 0 300px;
+    margin-right: 20px;
+    background-color: var(--card-background);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    scroll-snap-align: start;
+    position: relative;
+    min-width: 200px;
+    flex-shrink: 0;
+    cursor: grab;
+    user-select: none;
+    display: flex;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
+}
+
+.card-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+    transition: opacity 0.3s;
+}
+
+.card:hover .card-background {
+    opacity: 0.85;
+}
+
+.card-content {
+    position: relative;
+    padding: 15px;
+    background-color: rgba(var(--card-background-rgb), 0.8);
+    height: 100%;
+}
+
+.card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.card h3 {
+    margin-top: 0;
+    font-size: 1.1em;
+    color: var(--text-color);
+}
+
+.card p {
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.card a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Feed list styles */
+#feedList {
+    margin-top: 40px;
+    background-color: var(--card-background);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#feedList h2 {
+    color: var(--text-color);
+    margin-top: 0;
+}
+
+/* Feed item styles */
+.feedItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.feedItem:last-child {
+    border-bottom: none;
+}
+
+.feed-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.feedItem button {
+    padding: 5px 10px;
+    font-size: 0.8em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.feedItem button:first-child {
+    background-color: var(--primary-color);
+}
+
+.feedItem button:first-child:hover {
+    background-color: #2980b9;
+}
+
+.feedItem button:last-child {
+    background-color: #e74c3c;
+}
+
+.feedItem button:last-child:hover {
+    background-color: #c0392b;
+}
