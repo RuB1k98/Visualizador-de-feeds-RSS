@@ -27,6 +27,8 @@ function extractImageFromContent(content) {
 
 function updateCategories() {
     categories = new Set(feeds.map(feed => feed.category).filter(Boolean));
+    categories.delete("Podcast");  // Eliminar la categoría "Podcast" de la lista de categorías para que no aparezca en los filtros ya que tienen su seccion propia
+
     const categoryFilters = document.getElementById('categoryFilters');
     categoryFilters.innerHTML = '<span>categorías:</span>';
     
@@ -58,3 +60,4 @@ function updateCategories() {
         filterFeeds();
     });
 }
+
