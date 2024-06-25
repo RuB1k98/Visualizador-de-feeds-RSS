@@ -1,1 +1,2 @@
-Esto es el readme.txt probando cambio numero 1
+link para ver web en github:
+https://rub1k98.github.io/Visualizador-de-feeds-RSS/
