@@ -8,7 +8,7 @@
 
 .feed-section {
     margin-bottom: 40px;
-    margin-left: 300px;
+    margin-left: 40px;
     margin-right: 40px;
 }
 
@@ -35,6 +35,25 @@
     scroll-snap-type: none;
     gap: 20px;
 }
+
+.feed-content::-webkit-scrollbar {
+    height: 5px; /* Ancho de la barra de desplazamiento */
+}
+
+.feed-content::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color de fondo del riel de la barra de desplazamiento */
+    border-radius: 5px; /* Bordes redondeados del riel */
+}
+
+.feed-content::-webkit-scrollbar-thumb {
+    background: #888; /* Color del "pulgar" de la barra de desplazamiento */
+    border-radius: 5px; /* Bordes redondeados del "pulgar" */
+}
+
+.feed-content::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Color del "pulgar" cuando está en modo hover */
+}
+
 
 .feed-content.active {
     cursor: grabbing;
