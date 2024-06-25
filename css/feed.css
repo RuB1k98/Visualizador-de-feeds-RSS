@@ -75,11 +75,24 @@
     cursor: grab;
     user-select: none;
     display: flex;
+    flex-direction: column;
+    height: 300px;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
+.card-image {
+    width: 100%;
+    height: 30%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.card-content {
+    position: relative;
+    padding: 15px;
+    background-color: rgba(var(--card-background-rgb), 0.8);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .card-background {
@@ -92,29 +105,11 @@
     background-position: center;
     opacity: 0.3;
     transition: opacity 0.3s;
+    z-index: 0;
 }
 
 .card:hover .card-background {
     opacity: 0.9;
-}
-
-.card:hover img {
-    z-index: 0;
-    opacity: 0;
-}
-
-.card-content {
-    position: relative;
-    padding: 15px;
-    background-color: rgba(var(--card-background-rgb), 0.8);
-    height: 100%;
-}
-
-.card img {
-    width: 35%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1000;
 }
 
 .card h3 {
@@ -127,12 +122,28 @@
     font-size: 0.9em;
     margin-bottom: 10px;
     color: var(--text-color);
+    flex-grow: 1;
+    overflow: hidden;
 }
 
 .card a {
     color: var(--primary-color);
     text-decoration: none;
     font-weight: bold;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8em;
+    color: #666;
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.time-ago, .feed-name {
+    display: inline-block;
 }
 
 /* Feed list styles */

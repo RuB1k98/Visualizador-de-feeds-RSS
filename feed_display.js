@@ -127,6 +127,10 @@ function createCard(item, category, feedTitle) {
     // Obtiene una descripción corta del elemento
     let description = item.description ? stripImages(item.description).slice(0, 100) + '...' : '';
     
+    // Calcula el tiempo transcurrido desde la publicación
+    const publishedDate = new Date(item.pubDate);
+    const timeAgo = getTimeAgo(publishedDate);
+    
     if (category.toLowerCase() === 'podcast') {
         // Crea el contenido HTML de la tarjeta para podcasts
         card.innerHTML = `
@@ -135,6 +139,10 @@ function createCard(item, category, feedTitle) {
                 <h3>${item.title}</h3>
                 <p>${description}</p>
                 <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="read-more">Leer más</a>
+                <div class="card-footer">
+                    <span class="time-ago">${timeAgo}</span>
+                    <span class="feed-name">Por ${feedTitle}.</span>
+                </div>
             </div>
         `;
         
@@ -156,6 +164,10 @@ function createCard(item, category, feedTitle) {
                 <h3>${item.title}</h3>
                 ${item.title.length < 50 ? `<p>${description}</p>` : ''}
                 <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="read-more">Leer más</a>
+                <div class="card-footer">
+                    <span class="time-ago">${timeAgo}</span>
+                    <span class="feed-name">Por ${feedTitle}.</span>
+                </div>
             </div>
         `;
         
@@ -164,12 +176,37 @@ function createCard(item, category, feedTitle) {
             const img = document.createElement('img');
             img.src = imageUrl;
             img.alt = item.title;
+            img.className = 'card-image'; // Añadimos una clase para estilizar
             img.onerror = function() {
                 this.style.display = 'none';
             };
-            card.insertBefore(img, card.querySelector('.card-content').nextSibling);
+            card.insertBefore(img, card.firstChild);
         }
     }
     
     return card;
+}
+
+// Función para calcular el tiempo transcurrido
+function getTimeAgo(date) {
+    const now = new Date();
+    const diffInSeconds = Math.floor((now - date) / 1000);
+    
+    const intervals = {
+        año: 31536000,
+        mes: 2592000,
+        semana: 604800,
+        día: 86400,
+        hora: 3600,
+        minuto: 60
+    };
+    
+    for (const [unit, secondsInUnit] of Object.entries(intervals)) {
+        const interval = Math.floor(diffInSeconds / secondsInUnit);
+        if (interval >= 1) {
+            return `Hace ${interval} ${unit}${interval > 1 ? (unit === 'mes' ? 'es' : 's') : ''}`;
+        }
+    }
+    
+    return 'Hace un momento';
 }
