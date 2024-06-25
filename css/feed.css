@@ -68,7 +68,12 @@
 }
 
 .card:hover .card-background {
-    opacity: 0.85;
+    opacity: 0.9;
+}
+
+.card:hover img {
+    z-index: 0;
+    opacity: 0;
 }
 
 .card-content {
@@ -82,6 +87,7 @@
     width: 35%;
     height: 100%;
     object-fit: cover;
+    z-index: 1000;
 }
 
 .card h3 {
