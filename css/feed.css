@@ -1,7 +1,15 @@
 /* Feed section styles */
+
+#feedsContainer {
+    flex: 1;
+    min-width: 0;
+    background-color: var(--card-background);
+}
+
 .feed-section {
     margin-bottom: 40px;
     margin-left: 300px;
+    margin-right: 40px;
 }
 
 .feed-title {
