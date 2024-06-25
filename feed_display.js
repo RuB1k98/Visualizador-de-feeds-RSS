@@ -82,7 +82,7 @@ function displayFeedCentral(data, feedTitle, category, url) {
     feedContent.className = 'feed-content';
 
     for (const item of data.items) {
-        const card = createCard(item, category);
+        const card = createCard(item, category, feedTitle);
         feedContent.appendChild(card);
     }
 
@@ -105,7 +105,7 @@ function displayFeedPodcast(data, feedTitle, url) {
     const podcastContainer = document.getElementById('podcastContainer');
     
     if (data.items.length > 0) {
-        const card = createCard(data.items[0], 'podcast');
+        const card = createCard(data.items[0], 'podcast', feedTitle);
         podcastContainer.appendChild(card);
     }
 
@@ -113,7 +113,7 @@ function displayFeedPodcast(data, feedTitle, url) {
 }
 
 // Función para crear una tarjeta para cada elemento del feed
-function createCard(item, category) {
+function createCard(item, category, feedTitle) {
     // Crea un nuevo elemento div para la tarjeta
     const card = document.createElement('div');
     card.className = 'card';
