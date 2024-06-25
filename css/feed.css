@@ -120,6 +120,7 @@
 
 .card p {
     font-size: 0.9em;
+    margin-top: -10px;
     margin-bottom: 10px;
     color: var(--text-color);
     flex-grow: 1;
@@ -139,7 +140,7 @@
     color: #666;
     margin-top: auto;
     padding-top: 10px;
-    border-top: 1px solid #eee;
+    border-top: 1px solid #6666666e;
 }
 
 .time-ago, .feed-name {
