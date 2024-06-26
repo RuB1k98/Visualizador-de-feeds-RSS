@@ -138,7 +138,7 @@ function createCard(item, category, feedTitle) {
         <img src="${imageUrl}" alt="${item.title}" class="card-image hidden"> <!-- Imagen oculta por clase -->
         <div class="card-content">
             <h3>${item.title}</h3>
-            ${item.title.length < 50 ? `<p>${description}</p>` : ''}
+            <p>${description}</p>
             <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="read-more">Leer más</a>
             <div class="card-footer">
                 <span class="time-ago">${timeAgo}</span>
@@ -163,7 +163,7 @@ function createCard(item, category, feedTitle) {
         <img src="${imageUrl}" alt="${item.title}" class="card-image hidden"> <!-- Imagen oculta por clase -->
         <div class="card-content">
             <h3>${item.title}</h3>
-            ${item.title.length < 50 ? `<p>${description}</p>` : ''}
+            <p>${description}</p>
             <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="read-more">Leer más</a>
             <div class="card-footer">
                 <span class="time-ago">${timeAgo}</span>
