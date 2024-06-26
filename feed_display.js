@@ -1,5 +1,7 @@
 // feed_display.js
 
+
+
 // Función asíncrona para obtener el feed RSS
 async function fetchFeed(url, title, category) {
     try {
@@ -82,7 +84,7 @@ function displayFeedCentral(data, feedTitle, category, url) {
     feedContent.className = 'feed-content';
 
     for (const item of data.items) {
-        const card = createCard(item, category, feedTitle);
+        const card = createCard(item, feedTitle);
         feedContent.appendChild(card);
     }
 
@@ -105,7 +107,7 @@ function displayFeedPodcast(data, feedTitle, url) {
     const podcastContainer = document.getElementById('podcastContainer');
     
     if (data.items.length > 0) {
-        const card = createCard(data.items[0], 'podcast', feedTitle);
+        const card = createCard(data.items[0], feedTitle);
         podcastContainer.appendChild(card);
     }
 
@@ -116,20 +118,16 @@ function displayFeedPodcast(data, feedTitle, url) {
 function createCard(item, feedTitle) {
     const card = document.createElement('div');
     card.className = 'card';
+    card.setAttribute('data-original-feed', feedTitle); // Almacenamos el título del feed original
 
-    // Obtiene la URL de la imagen o usa una por defecto
     const imageUrl = item.thumbnail || extractImageFromContent(item.content) || 'path/to/default-image.jpg';
-
-    // Obtiene una descripción corta del elemento
     const description = item.description ? stripImages(item.description).slice(0, 100) + '...' : '';
-
-    // Calcula el tiempo transcurrido desde la publicación
     const timeAgo = getTimeAgo(new Date(item.pubDate));
 
-    // Crea el contenido HTML de la tarjeta
     card.innerHTML = `
         <div class="card-background" style="background-image: url('${imageUrl}');"></div>
         <img src="${imageUrl}" alt="${item.title}" class="card-image hidden">
+        <button class="card-close-btn">&times;</button>
         <div class="card-content">
             <h3>${item.title}</h3>
             <p>${description}</p>
@@ -141,13 +139,93 @@ function createCard(item, feedTitle) {
         </div>
     `;
 
-    // Maneja la carga y errores de la imagen
     const img = card.querySelector('.card-image');
     img.onload = () => img.classList.remove('hidden');
     img.onerror = () => img.style.display = 'none';
 
+    const closeBtn = card.querySelector('.card-close-btn');
+    closeBtn.addEventListener('click', () => hideCard(card));
+
     return card;
 }
+
+// Nueva función para crear la sección de tarjetas ocultas
+function createHiddenCardsSection() {
+    const feedsContainer = document.getElementById('feedsContainer');
+    let hiddenSection = document.getElementById('hiddenCardsSection');
+    
+    if (!hiddenSection) {
+        hiddenSection = document.createElement('section');
+        hiddenSection.id = 'hiddenCardsSection';
+        hiddenSection.className = 'hidden-cards-section feed-section';
+        hiddenSection.innerHTML = `
+            <h2 class="feed-title">Tarjetas ocultas</h2>
+            <div class="hidden-cards-container feed-content"></div>
+        `;
+        feedsContainer.appendChild(hiddenSection);
+        
+        // Añadir event listeners de arrastre al contenedor de tarjetas ocultas
+        const hiddenCardsContainer = hiddenSection.querySelector('.hidden-cards-container');
+        addDragEventListeners(hiddenCardsContainer);
+    }
+    
+    return hiddenSection;
+}
+
+
+// Función modificada para ocultar la tarjeta y moverla a la sección de tarjetas ocultas
+function hideCard(card) {
+    const hiddenSection = createHiddenCardsSection();
+    const hiddenCardsContainer = hiddenSection.querySelector('.hidden-cards-container');
+    
+    // Remover la tarjeta de su posición actual
+    card.parentNode.removeChild(card);
+    
+    // Añadir la tarjeta a la sección de tarjetas ocultas
+    hiddenCardsContainer.appendChild(card);
+    
+    // Mostrar la sección de tarjetas ocultas si estaba oculta
+    hiddenSection.style.display = 'block';
+    
+    // Cambiar el evento del botón de cerrar para restaurar la tarjeta
+    const closeBtn = card.querySelector('.card-close-btn');
+    closeBtn.innerHTML = '&#8634;'; // Cambiar el símbolo a un ícono de restaurar
+    closeBtn.removeEventListener('click', () => hideCard(card));
+    closeBtn.addEventListener('click', () => restoreCard(card));
+}
+
+// Función modificada para restaurar una tarjeta oculta
+function restoreCard(card) {
+    const feedsContainer = document.getElementById('feedsContainer');
+    const hiddenSection = document.getElementById('hiddenCardsSection');
+    const hiddenCardsContainer = hiddenSection.querySelector('.hidden-cards-container');
+    
+    hiddenCardsContainer.removeChild(card);
+    
+    const closeBtn = card.querySelector('.card-close-btn');
+    closeBtn.innerHTML = '&times;';
+    closeBtn.removeEventListener('click', () => restoreCard(card));
+    closeBtn.addEventListener('click', () => hideCard(card));
+    
+    const originalFeed = card.getAttribute('data-original-feed');
+    const originalSection = Array.from(feedsContainer.children).find(section => 
+        section.querySelector('.feed-title').textContent === originalFeed
+    );
+    
+    if (originalSection) {
+        const feedContent = originalSection.querySelector('.feed-content');
+        feedContent.appendChild(card);
+    } else {
+        feedsContainer.insertBefore(card, hiddenSection);
+    }
+    
+    if (hiddenCardsContainer.children.length === 0) {
+        hiddenSection.style.display = 'none';
+    }
+    
+    saveHiddenCards(); // Guardar después de restaurar
+}
+
 
 
 // Función para calcular el tiempo transcurrido
