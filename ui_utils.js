@@ -27,7 +27,10 @@ function extractImageFromContent(content) {
 
 function updateCategories() {
     categories = new Set(feeds.map(feed => feed.category).filter(Boolean));
-
+        // Agregar "Tarjetas ocultas" si no existe
+        if (!categories.has('Tarjetas ocultas')) {
+            categories.add('Tarjetas ocultas');
+        }
     const categoryFilters = document.getElementById('categoryFilters');
     categoryFilters.innerHTML = '<span>categorías:</span>';
     

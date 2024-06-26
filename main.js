@@ -21,7 +21,7 @@ function loadFeeds() {
         feeds = JSON.parse(savedFeeds);
         // Actualizar las categorías disponibles
         updateCategories();
-        // Actualizar la lista de feeds mostrados
+        // Actualizar la lista de feeds cargados abajo
         updateFeedList();
         // Cargar cada feed almacenado
         feeds.forEach(feed => fetchFeed(feed.url, feed.title, feed.category));
@@ -44,7 +44,12 @@ function filterFeeds() {
 
     feedSections.forEach(section => {
         const category = section.getAttribute('data-category');
-        if (selectedCategories.includes(category)) {
+        const feedContent = section.querySelector('.feed-content'); // Obtener el contenedor de contenido del feed
+
+        // Verificar si hay elementos visibles dentro del feedContent
+        const visibleItems = feedContent.querySelectorAll('.card:not(.hidden)');
+        
+        if (selectedCategories.includes(category) && visibleItems.length > 0) {
             section.style.display = '';
             visibleSections++;
         } else {
@@ -64,3 +69,5 @@ function filterFeeds() {
     const selectAllCheckbox = document.getElementById('selectAll');
     selectAllCheckbox.checked = selectedCategories.length === categories.size;
 }
+
+

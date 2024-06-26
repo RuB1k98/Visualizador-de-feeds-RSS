@@ -158,6 +158,7 @@ function createHiddenCardsSection() {
         hiddenSection = document.createElement('section');
         hiddenSection.id = 'hiddenCardsSection';
         hiddenSection.className = 'hidden-cards-section feed-section';
+        hiddenSection.setAttribute('data-category', "Tarjetas ocultas");
         hiddenSection.innerHTML = `
             <h2 class="feed-title">Tarjetas ocultas</h2>
             <div class="hidden-cards-container feed-content"></div>
@@ -178,6 +179,7 @@ function hideCard(card) {
     const hiddenSection = createHiddenCardsSection();
     const hiddenCardsContainer = hiddenSection.querySelector('.hidden-cards-container');
     
+
     // Remover la tarjeta de su posición actual
     card.parentNode.removeChild(card);
     
@@ -192,6 +194,8 @@ function hideCard(card) {
     closeBtn.innerHTML = '&#8634;'; // Cambiar el símbolo a un ícono de restaurar
     closeBtn.removeEventListener('click', () => hideCard(card));
     closeBtn.addEventListener('click', () => restoreCard(card));
+
+    filterFeeds();
 }
 
 // Función modificada para restaurar una tarjeta oculta
