@@ -134,54 +134,55 @@ function createCard(item, category, feedTitle) {
     if (category.toLowerCase() === 'podcast') {
         // Crea el contenido HTML de la tarjeta para podcasts
         card.innerHTML = `
-            <div class="card-background" ${imageUrl ? `style="background-image: url('${imageUrl}');"` : ''}></div>
-            <div class="card-content">
-                <h3>${item.title}</h3>
-                <p>${description}</p>
-                <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="read-more">Leer más</a>
-                <div class="card-footer">
-                    <span class="time-ago">${timeAgo}</span>
-                    <span class="feed-name">Por ${feedTitle}.</span>
-                </div>
+        <div class="card-background" ${imageUrl ? `style="background-image: url('${imageUrl}');"` : ''}></div>
+        <img src="${imageUrl}" alt="${item.title}" class="card-image hidden"> <!-- Imagen oculta por clase -->
+        <div class="card-content">
+            <h3>${item.title}</h3>
+            ${item.title.length < 50 ? `<p>${description}</p>` : ''}
+            <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="read-more">Leer más</a>
+            <div class="card-footer">
+                <span class="time-ago">${timeAgo}</span>
+                <span class="feed-name">Por ${feedTitle}.</span>
             </div>
-        `;
-        
-        // Si hay una imagen, la añade a la tarjeta (dentro de card-content)
-        if (imageUrl) {
-            const img = document.createElement('img');
-            img.src = imageUrl;
-            img.alt = item.title;
-            img.onerror = function() {
-                this.style.display = 'none';
-            };
-            card.querySelector('.card-content').insertBefore(img, card.querySelector('.card-content h3'));
-        }
+        </div>
+    `;
+    
+    // Si hay una imagen, la hace visible
+     if (imageUrl) {
+        const img = card.querySelector('.card-image');
+        img.onload = function() {
+            this.classList.remove('hidden');
+        };
+        img.onerror = function() {
+            this.style.display = 'none';
+        };
+    }
     } else {
-        // Crea el contenido HTML de la tarjeta para otras categorías
         card.innerHTML = `
-            <div class="card-background" ${imageUrl ? `style="background-image: url('${imageUrl}');"` : ''}></div>
-            <div class="card-content">
-                <h3>${item.title}</h3>
-                ${item.title.length < 50 ? `<p>${description}</p>` : ''}
-                <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="read-more">Leer más</a>
-                <div class="card-footer">
-                    <span class="time-ago">${timeAgo}</span>
-                    <span class="feed-name">Por ${feedTitle}.</span>
-                </div>
+        <div class="card-background" ${imageUrl ? `style="background-image: url('${imageUrl}');"` : ''}></div>
+        <img src="${imageUrl}" alt="${item.title}" class="card-image hidden"> <!-- Imagen oculta por clase -->
+        <div class="card-content">
+            <h3>${item.title}</h3>
+            ${item.title.length < 50 ? `<p>${description}</p>` : ''}
+            <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="read-more">Leer más</a>
+            <div class="card-footer">
+                <span class="time-ago">${timeAgo}</span>
+                <span class="feed-name">Por ${feedTitle}.</span>
             </div>
-        `;
-        
-        // Si hay una imagen, la añade a la tarjeta (después de card-content)
-        if (imageUrl) {
-            const img = document.createElement('img');
-            img.src = imageUrl;
-            img.alt = item.title;
-            img.className = 'card-image'; // Añadimos una clase para estilizar
-            img.onerror = function() {
-                this.style.display = 'none';
-            };
-            card.insertBefore(img, card.firstChild);
-        }
+        </div>
+    `;
+    
+    // Si hay una imagen, la hace visible
+    if (imageUrl) {
+        const img = card.querySelector('.card-image');
+        img.onload = function() {
+            this.classList.remove('hidden');
+        };
+        img.onerror = function() {
+            this.style.display = 'none';
+        };
+    }
+    
     }
     
     return card;
