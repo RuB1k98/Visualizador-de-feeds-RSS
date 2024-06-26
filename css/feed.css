@@ -4,6 +4,11 @@
     flex: 1;
     min-width: 0;
     background-color: var(--card-background);
+    column-count: auto;
+    column-width: 250px;
+    column-gap: 20px;
+    padding: 20px; 
+    align-items: justify;
 }
 
 .feed-section {
@@ -62,7 +67,7 @@
 /* Card styles */
 .card {
     flex: 0 0 300px;
-    margin-right: 20px;
+    margin-top: 20px;
     background-color: var(--card-background);
     border-radius: 8px;
     overflow: hidden;
@@ -70,7 +75,8 @@
     transition: transform 0.3s, box-shadow 0.3s;
     scroll-snap-align: start;
     position: relative;
-    min-width: 300px;
+    min-width: 250px;
+    max-width: 350px;
     flex-shrink: 0;
     cursor: grab;
     user-select: none;

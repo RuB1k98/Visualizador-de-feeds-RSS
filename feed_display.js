@@ -78,39 +78,30 @@ async function displayFeed(data, feedTitle, category, url) {
 // Nueva función para mostrar feeds centrales
 function displayFeedCentral(data, feedTitle, category, url) {
     const feedsContainer = document.getElementById('feedsContainer');
-    const feedContent = document.createElement('div');
-    feedContent.className = 'feed-content';
 
     for (const item of data.items) {
         const card = createCard(item, category, feedTitle);
-        feedContent.appendChild(card);
+        feedsContainer.appendChild(card);
     }
 
-    const feedSection = document.createElement('section');
-    feedSection.className = 'feed-section';
-    feedSection.setAttribute('data-category', category);
-    
-    feedSection.innerHTML = `
-        <h2 class="feed-title">${feedTitle}${category ? ` <span class="feed-category">(${category})</span>` : ''}</h2>
-    `;
-    
-    feedSection.appendChild(feedContent);
-    feedsContainer.appendChild(feedSection);
-    
-    addDragEventListeners(feedContent);
+    addDragEventListeners(feedsContainer);
 }
+
+
+
+
 
 // Nueva función para mostrar feeds de podcast
-function displayFeedPodcast(data, feedTitle, url) {
-    const podcastContainer = document.getElementById('podcastContainer');
-    
-    if (data.items.length > 0) {
-        const card = createCard(data.items[0], 'podcast', feedTitle);
-        podcastContainer.appendChild(card);
-    }
-
-    addDragEventListeners(podcastContainer);
-}
+//function displayFeedPodcast(data, feedTitle, url) {
+//    const podcastContainer = document.getElementById('podcastContainer');
+//    
+//    if (data.items.length > 0) {
+//        const card = createCard(data.items[0], 'podcast', feedTitle);
+//        podcastContainer.appendChild(card);
+ //   }
+//
+//    addDragEventListeners(podcastContainer);
+//}
 
 // Función para crear una tarjeta para cada elemento del feed
 function createCard(item, category, feedTitle) {
@@ -125,7 +116,7 @@ function createCard(item, category, feedTitle) {
     }
     
     // Obtiene una descripción corta del elemento
-    let description = item.description ? stripImages(item.description).slice(0, 100) + '...' : '';
+    let description = item.description ? stripImages(item.description).slice(0, 300) + '...' : '';
     
     // Calcula el tiempo transcurrido desde la publicación
     const publishedDate = new Date(item.pubDate);
