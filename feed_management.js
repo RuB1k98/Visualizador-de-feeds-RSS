@@ -92,7 +92,14 @@ function removeFeed(index) {
 // Función para actualizar la lista de feeds en la UI
 function updateFeedList() {
     const feedList = document.getElementById('feedList');
-    feedList.innerHTML = '<h2>Feeds cargados</h2>';
+    feedList.innerHTML = `
+        <details>
+            <summary>Feeds cargados</summary>
+            <div id="feedItems"></div>
+        </details>
+    `;
+    
+    const feedItems = document.getElementById('feedItems');
     
     // Crea un elemento en la lista para cada feed
     feeds.forEach((feed, index) => {
@@ -105,6 +112,6 @@ function updateFeedList() {
                 <button onclick="removeFeed(${index})">Eliminar</button>
             </div>
         `;
-        feedList.appendChild(feedItem);
+        feedItems.appendChild(feedItem);
     });
 }
