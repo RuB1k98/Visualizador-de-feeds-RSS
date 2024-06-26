@@ -7,21 +7,19 @@
 }
 
 .feed-section {
-    margin-bottom: 40px;
     margin-left: 40px;
     margin-right: 40px;
 }
 
 .feed-title {
-    font-size: 1.5em;
+    font-size: 1.3em;
     color: var(--text-color);
-    margin-bottom: 15px;
     padding-bottom: 5px;
-    border-bottom: 2px solid var(--primary-color);
+    border-bottom: 1px solid var(--primary-color);
 }
 
 .feed-category {
-    font-size: 0.8em;
+    font-size: 0.6em;
     color: var(--text-color);
     font-weight: normal;
 }
@@ -62,7 +60,6 @@
 /* Card styles */
 .card {
     flex: 0 0 300px;
-    margin-right: 20px;
     background-color: var(--card-background);
     border-radius: 8px;
     overflow: hidden;
@@ -70,7 +67,8 @@
     transition: transform 0.3s, box-shadow 0.3s;
     scroll-snap-align: start;
     position: relative;
-    min-width: 300px;
+    min-width: 250px;
+    max-width: 250px;
     flex-shrink: 0;
     cursor: grab;
     user-select: none;

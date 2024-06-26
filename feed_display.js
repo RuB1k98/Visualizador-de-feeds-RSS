@@ -91,7 +91,7 @@ function displayFeedCentral(data, feedTitle, category, url) {
     feedSection.setAttribute('data-category', category);
     
     feedSection.innerHTML = `
-        <h2 class="feed-title">${feedTitle}${category ? ` <span class="feed-category">(${category})</span>` : ''}</h2>
+        <h2 class="feed-title">${feedTitle}</h2>
     `;
     
     feedSection.appendChild(feedContent);
@@ -113,29 +113,23 @@ function displayFeedPodcast(data, feedTitle, url) {
 }
 
 // Función para crear una tarjeta para cada elemento del feed
-function createCard(item, category, feedTitle) {
-    // Crea un nuevo elemento div para la tarjeta
+function createCard(item, feedTitle) {
     const card = document.createElement('div');
     card.className = 'card';
-    
-    // Obtiene la URL de la imagen del elemento o extrae una del contenido
-    let imageUrl = item.thumbnail || extractImageFromContent(item.content);
-    if (!imageUrl) {
-        imageUrl = 'path/to/default-image.jpg';
-    }
-    
+
+    // Obtiene la URL de la imagen o usa una por defecto
+    const imageUrl = item.thumbnail || extractImageFromContent(item.content) || 'path/to/default-image.jpg';
+
     // Obtiene una descripción corta del elemento
-    let description = item.description ? stripImages(item.description).slice(0, 100) + '...' : '';
-    
+    const description = item.description ? stripImages(item.description).slice(0, 100) + '...' : '';
+
     // Calcula el tiempo transcurrido desde la publicación
-    const publishedDate = new Date(item.pubDate);
-    const timeAgo = getTimeAgo(publishedDate);
-    
-    if (category.toLowerCase() === 'podcast') {
-        // Crea el contenido HTML de la tarjeta para podcasts
-        card.innerHTML = `
-        <div class="card-background" ${imageUrl ? `style="background-image: url('${imageUrl}');"` : ''}></div>
-        <img src="${imageUrl}" alt="${item.title}" class="card-image hidden"> <!-- Imagen oculta por clase -->
+    const timeAgo = getTimeAgo(new Date(item.pubDate));
+
+    // Crea el contenido HTML de la tarjeta
+    card.innerHTML = `
+        <div class="card-background" style="background-image: url('${imageUrl}');"></div>
+        <img src="${imageUrl}" alt="${item.title}" class="card-image hidden">
         <div class="card-content">
             <h3>${item.title}</h3>
             <p>${description}</p>
@@ -146,47 +140,15 @@ function createCard(item, category, feedTitle) {
             </div>
         </div>
     `;
-    
-    // Si hay una imagen, la hace visible
-     if (imageUrl) {
-        const img = card.querySelector('.card-image');
-        img.onload = function() {
-            this.classList.remove('hidden');
-        };
-        img.onerror = function() {
-            this.style.display = 'none';
-        };
-    }
-    } else {
-        card.innerHTML = `
-        <div class="card-background" ${imageUrl ? `style="background-image: url('${imageUrl}');"` : ''}></div>
-        <img src="${imageUrl}" alt="${item.title}" class="card-image hidden"> <!-- Imagen oculta por clase -->
-        <div class="card-content">
-            <h3>${item.title}</h3>
-            <p>${description}</p>
-            <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="read-more">Leer más</a>
-            <div class="card-footer">
-                <span class="time-ago">${timeAgo}</span>
-                <span class="feed-name">Por ${feedTitle}.</span>
-            </div>
-        </div>
-    `;
-    
-    // Si hay una imagen, la hace visible
-    if (imageUrl) {
-        const img = card.querySelector('.card-image');
-        img.onload = function() {
-            this.classList.remove('hidden');
-        };
-        img.onerror = function() {
-            this.style.display = 'none';
-        };
-    }
-    
-    }
-    
+
+    // Maneja la carga y errores de la imagen
+    const img = card.querySelector('.card-image');
+    img.onload = () => img.classList.remove('hidden');
+    img.onerror = () => img.style.display = 'none';
+
     return card;
 }
+
 
 // Función para calcular el tiempo transcurrido
 function getTimeAgo(date) {
