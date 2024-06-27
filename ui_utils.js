@@ -61,7 +61,7 @@ function updateCategories() {
         checkbox.type = 'checkbox';
         checkbox.id = `category-${category}`;
         checkbox.value = category;
-        checkbox.checked = true;
+        checkbox.checked = category !== 'Tarjetas ocultas'; // Set the checkbox to unchecked for 'Tarjetas ocultas'
         checkbox.addEventListener('change', filterFeeds);
 
         const label = document.createElement('label');
