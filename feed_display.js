@@ -84,6 +84,8 @@ function displayFeedCentral(data, feedTitle, category, url) {
         feedContent.appendChild(card);
     }
 
+    hideCardsWithHiddenTitles(); // Ocultar tarjetas con títulos ocultos
+
     const feedSection = document.createElement('section');
     feedSection.className = 'feed-section';
     feedSection.setAttribute('data-category', category);
@@ -101,6 +103,7 @@ function displayFeedCentral(data, feedTitle, category, url) {
 
 // Función para crear una tarjeta para cada elemento del feed
 function createCard(item, feedTitle) {
+
     const card = document.createElement('div');
     card.className = 'card';
     card.setAttribute('data-original-feed', feedTitle); // Almacenamos el título del feed original
@@ -164,7 +167,6 @@ function hideCard(card) {
     const hiddenSection = createHiddenCardsSection();
     const hiddenCardsContainer = hiddenSection.querySelector('.hidden-cards-container');
     
-
     // Remover la tarjeta de su posición actual
     card.parentNode.removeChild(card);
     
@@ -180,6 +182,16 @@ function hideCard(card) {
     closeBtn.removeEventListener('click', () => hideCard(card));
     closeBtn.addEventListener('click', () => restoreCard(card));
 
+    // Guardar el título de la tarjeta en el localstorage si no existe previamente
+    const title = card.querySelector('h3').textContent;
+    const hiddenTitles = JSON.parse(localStorage.getItem('TitulosOcultos')) || [];
+    if (!hiddenTitles.includes(title)) {
+        hiddenTitles.push(title);
+        localStorage.setItem('TitulosOcultos', JSON.stringify(hiddenTitles));
+    }
+
+    console.log(hiddenTitles);
+
     filterFeeds();
 }
 
@@ -189,7 +201,6 @@ function restoreCard(card) {
     const hiddenSection = document.getElementById('hiddenCardsSection');
     const hiddenCardsContainer = hiddenSection.querySelector('.hidden-cards-container');
     
-    hiddenCardsContainer.removeChild(card);
     
     const closeBtn = card.querySelector('.card-close-btn');
     closeBtn.innerHTML = '&times;';
@@ -212,7 +223,13 @@ function restoreCard(card) {
         hiddenSection.style.display = 'none';
     }
     
-    saveHiddenCards(); // Guardar después de restaurar
+    filterFeeds();
+
+    // Remover el título de la tarjeta de TitulosOcultos
+    const title = card.querySelector('h3').textContent;
+    let hiddenTitles = JSON.parse(localStorage.getItem('TitulosOcultos'));
+    hiddenTitles = hiddenTitles.filter(hiddenTitle => hiddenTitle !== title);
+    localStorage.setItem('TitulosOcultos', JSON.stringify(hiddenTitles));
 }
 
 
@@ -239,4 +256,17 @@ function getTimeAgo(date) {
     }
     
     return 'Hace un momento';
+}
+
+// Función para ocultar las tarjetas cuyos títulos se encuentren en TitulosOcultos
+function hideCardsWithHiddenTitles() {
+    const hiddenTitles = JSON.parse(localStorage.getItem('TitulosOcultos'));
+    const cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => {
+        const title = card.querySelector('h3').textContent;
+        if (hiddenTitles.includes(title)) {
+            hideCard(card);
+        }
+    });
 }
