@@ -1,3 +1,8 @@
+/**
+ * Removes all images from the given HTML string.
+ * @param {string} html - The HTML string to strip images from.
+ * @returns {string} The HTML string without any images.
+ */
 function stripImages(html) {
     const doc = new DOMParser().parseFromString(html, 'text/html');
     const images = doc.querySelectorAll('img');
@@ -5,6 +10,11 @@ function stripImages(html) {
     return doc.body.innerHTML;
 }
 
+/**
+ * Fetches the image URL from the given article URL.
+ * @param {string} url - The URL of the article.
+ * @returns {Promise<string|null>} A promise that resolves to the image URL, or null if no image is found.
+ */
 async function fetchImageFromArticle(url) {
     try {
         const response = await fetch(url);
@@ -18,6 +28,11 @@ async function fetchImageFromArticle(url) {
     }
 }
 
+/**
+ * Extracts the image URL from the given content.
+ * @param {string} content - The content to extract the image URL from.
+ * @returns {string|null} The image URL, or null if no image is found.
+ */
 function extractImageFromContent(content) {
     const parser = new DOMParser();
     const doc = parser.parseFromString(content, 'text/html');
@@ -25,15 +40,18 @@ function extractImageFromContent(content) {
     return img ? img.src : null;
 }
 
+/**
+ * Updates the categories and filters for the feeds.
+ */
 function updateCategories() {
     categories = new Set(feeds.map(feed => feed.category).filter(Boolean));
-        // Agregar "Tarjetas ocultas" si no existe
-        if (!categories.has('Tarjetas ocultas')) {
-            categories.add('Tarjetas ocultas');
-        }
+    // Agregar "Tarjetas ocultas" si no existe
+    if (!categories.has('Tarjetas ocultas')) {
+        categories.add('Tarjetas ocultas');
+    }
     const categoryFilters = document.getElementById('categoryFilters');
     categoryFilters.innerHTML = '<span>categorías:</span>';
-    
+
     const selectAllLabel = document.createElement('label');
     selectAllLabel.innerHTML = '<input type="checkbox" id="selectAll" checked> Seleccionar todo';
     categoryFilters.appendChild(selectAllLabel);
@@ -62,4 +80,3 @@ function updateCategories() {
         filterFeeds();
     });
 }
-

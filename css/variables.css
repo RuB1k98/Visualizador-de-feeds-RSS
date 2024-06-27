@@ -5,6 +5,10 @@
     --card-background: #ffffff;
     --text-color: #333333;
     --card-background-rgb: 255, 255, 255;
+    --border-color: #dcdcdc; /* Nuevo */
+    --active-element-bg: #f0f0f0; /* Nuevo */
+    --hover-element-bg: #e7e7e7; /* Nuevo */
+    --subtext-color: #666666; /* Nuevo */
 }
 
 /* Dark mode variables */
@@ -15,4 +19,8 @@
     --card-background: #34495e;
     --text-color: #ecf0f1;
     --card-background-rgb: 52, 73, 94;
+    --border-color: #2c3e50; /* Nuevo */
+    --active-element-bg: #2b3b4f; /* Nuevo */
+    --hover-element-bg: #2d4159; /* Nuevo */
+    --subtext-color: #a0a0a0; /* Nuevo */
 }
