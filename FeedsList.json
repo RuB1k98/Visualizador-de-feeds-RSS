@@ -7,12 +7,7 @@
   {
     "url": "https://cenital.com/feed/",
     "title": "Cenital",
-    "category": "Cenital"
-  },
-  {
-    "url": "https://www.hltv.org/rss/news",
-    "title": "HLTV",
-    "category": "Counter Strike"
+    "category": "Noticias"
   },
   {
     "url": "https://anchor.fm/s/577fca7c/podcast/rss",
@@ -27,7 +22,7 @@
   {
     "url": "https://www.revistaanfibia.com/feed/",
     "title": "Anfibia",
-    "category": "Revista anfibia"
+    "category": "Notas"
   },
   {
     "url": "https://podcast.revistaanfibia.com/feed/",
@@ -37,37 +32,7 @@
   {
     "url": "https://www.infobae.com/feeds/rss/",
     "title": "infobae",
-    "category": "InfoBae"
-  },
-  {
-    "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCZoeiKBLDv0Hj56pN5d2Ocw",
-    "title": "Lucas Baini",
-    "category": "Youtube"
-  },
-  {
-    "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCpvYnSZNyBxF2MSWvju06jg",
-    "title": "Nico Guthman",
-    "category": "Youtube"
-  },
-  {
-    "url": "https://www.reddit.com/r/rickandmorty/.rss",
-    "title": "Rick and morty",
-    "category": "Reddit"
-  },
-  {
-    "url": "https://www.reddit.com/r/csgo/.rss",
-    "title": "CSGO",
-    "category": "Reddit"
-  },
-  {
-    "url": "https://www.reddit.com/r/rickandmorty/new/.rss",
-    "title": "Rick and morty nuevos",
-    "category": "Reddit"
-  },
-  {
-    "url": "http://www.bbc.co.uk/mundo/temas/internacional/index.xml",
-    "title": "BBC",
-    "category": "Internacional"
+    "category": "Noticias"
   },
   {
     "url": "https://actualidad.rt.com/feeds/all.rss",
@@ -75,13 +40,13 @@
     "category": "Internacional"
   },
   {
-    "url": "https://www.cgtn.com/subscribe/rss/section/world.xml",
-    "title": "CGTN",
-    "category": "Internacional"
-  },
-  {
     "url": "https://rss.dw.com/rdf/rss-en-world",
     "title": "DW",
     "category": "Internacional"
+  },
+  {
+    "url": "https://elgatoylacaja.com/feed",
+    "title": "El gato y la caja",
+    "category": "Notas"
   }
 ]
