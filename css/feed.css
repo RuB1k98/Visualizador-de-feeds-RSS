@@ -48,17 +48,17 @@
 }
 
 .feed-content::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: var(--scrollbar-track-color);
     border-radius: 5px;
 }
 
 .feed-content::-webkit-scrollbar-thumb {
-    background: #888;
+    background: var(--scrollbar-thumb-color);
     border-radius: 5px;
 }
 
 .feed-content::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: var(--scrollbar-thumb-hover-color);
 }
 
 /* Active feed content styles */
@@ -87,7 +87,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-color);
 }
 
 /* Last feed item styles */
@@ -115,7 +115,7 @@
 }
 
 .feedItem button:first-child:hover {
-    background-color: #2980b9;
+    background-color: var(--hover-element-bg);
 }
 
 /* Last button in feed item styles */

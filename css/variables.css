@@ -9,6 +9,10 @@
     --active-element-bg: #f0f0f0; /* Nuevo */
     --hover-element-bg: #e7e7e7; /* Nuevo */
     --subtext-color: #666666; /* Nuevo */
+    --scrollbar-track-color: #f1f1f1; /* Nuevo */
+    --scrollbar-thumb-color: #888888; /* Nuevo */
+    --scrollbar-thumb-hover-color: #555555; /* Nuevo */
+    --scrollbar-thumb-active-color: #333333; /* Nuevo */
 }
 
 /* Dark mode variables */
@@ -22,5 +26,45 @@
     --border-color: #2c3e50; /* Nuevo */
     --active-element-bg: #2b3b4f; /* Nuevo */
     --hover-element-bg: #2d4159; /* Nuevo */
-    --subtext-color: #a0a0a0; /* Nuevo */
+    --subtext-color: #ffffff; /* Nuevo */
+    --scrollbar-track-color: #222222; /* Nuevo */
+    --scrollbar-thumb-color: #555555; /* Nuevo */
+    --scrollbar-thumb-hover-color: #888888; /* Nuevo */
+    --scrollbar-thumb-active-color: #aaaaaa; /* Nuevo */
+}
+
+/* Set de colores estilo pastel */
+.pastel-colors {
+    --primary-color: #ffb3ba;
+    --secondary-color: #ffdfba;
+    --background-color: #bae1ff;
+    --card-background: #bae1ff;
+    --text-color: #333333;
+    --card-background-rgb: 186, 225, 255;
+    --border-color: #dcdcdc;
+    --active-element-bg: #f0f0f0;
+    --hover-element-bg: #e7e7e7;
+    --subtext-color: #666666;
+    --scrollbar-track-color: #f1f1f1;
+    --scrollbar-thumb-color: #888888;
+    --scrollbar-thumb-hover-color: #555555;
+    --scrollbar-thumb-active-color: #333333;
+}
+
+/* Set de colores estilo oscuro y vibrante */
+.vibrant-dark-colors {
+    --primary-color: #ff4081;
+    --secondary-color: #651fff;
+    --background-color: #212121;
+    --card-background: #424242;
+    --text-color: #ffffff;
+    --card-background-rgb: 66, 66, 66;
+    --border-color: #dcdcdc;
+    --active-element-bg: #2b2b2b;
+    --hover-element-bg: #333333;
+    --subtext-color: #cccccc;
+    --scrollbar-track-color: #222222;
+    --scrollbar-thumb-color: #555555;
+    --scrollbar-thumb-hover-color: #888888;
+    --scrollbar-thumb-active-color: #aaaaaa;
 }

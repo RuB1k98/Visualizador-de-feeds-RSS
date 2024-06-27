@@ -100,12 +100,33 @@
     display: flex;
     justify-content: space-between;
     font-size: 0.8em;
-    color: #666;
+    color: var(--subtext-color);
     margin-top: auto;
     padding-top: 10px;
-    border-top: 1px solid #6666666e;
+    border-top: 1px solid var(--border-color);
 }
 
 .time-ago, .feed-name {
     display: inline-block;
+}
+
+/* Custom scrollbar styles */
+.card::-webkit-scrollbar {
+    width: 8px;
+}
+
+.card::-webkit-scrollbar-track {
+    background-color: var(--scrollbar-track-color);
+}
+
+.card::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-color);
+}
+
+.card::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-hover-color);
+}
+
+.card::-webkit-scrollbar-thumb:active {
+    background-color: var(--scrollbar-thumb-active-color);
 }
