@@ -48,5 +48,70 @@
     "url": "https://elgatoylacaja.com/feed",
     "title": "El gato y la caja",
     "category": "Notas"
+  },
+  {
+    "url": "https://www.ambito.com/rss/pages/home.xml",
+    "title": "Ambito portada",
+    "category": "Noticias"
+  },
+  {
+    "url": "https://www.ambito.com/rss/pages/economia.xml",
+    "title": "Ambito economia",
+    "category": "Noticias"
+  },
+  {
+    "url": "https://www.ambito.com/rss/pages/politica.xml",
+    "title": "Ambito politica",
+    "category": "Noticias"
+  },
+  {
+    "url": "https://www.ambito.com/rss/pages/mundo.xml",
+    "title": "Ambito mundo",
+    "category": "Internacional"
+  },
+  {
+    "url": "https://www.telesurtv.net/rss/RssMundo.html",
+    "title": "Telesur mundo",
+    "category": "Internacional"
+  },
+  {
+    "url": "https://www.telesurtv.net/rss/RssLatinoamerica.html",
+    "title": "Telesur latinoamerica",
+    "category": "Internacional"
+  },
+  {
+    "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/argentina/portada",
+    "title": "El pais",
+    "category": "Internacional"
+  },
+  {
+    "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+    "title": "BBC",
+    "category": "Internacional"
+  },
+  {
+    "url": "https://www.economist.com/international/rss.xml",
+    "title": "The economist",
+    "category": "Internacional"
+  },
+  {
+    "url": "https://www.rosario3.com/rss.html",
+    "title": "Rosario 3",
+    "category": "Rosario"
+  },
+  {
+    "url": "https://www.lacapital.com.ar/rss/pages/laciudad.xml",
+    "title": "La capital: la ciudad",
+    "category": "Rosario"
+  },
+  {
+    "url": "https://www.lacapital.com.ar/rss/ultimas-noticias.xml",
+    "title": "La capital: ultimas noticias",
+    "category": "Rosario"
+  },
+  {
+    "url": "https://www.lacapital.com.ar/rss/pages/educacion.xml",
+    "title": "La capital: educacion",
+    "category": "Noticias"
   }
 ]
