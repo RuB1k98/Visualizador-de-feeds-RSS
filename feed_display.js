@@ -167,7 +167,7 @@ function addSwipeFunctionality(card) {
 
         card.style.transition = 'none';
         card.style.transform = `translateX(${distX}px) rotate(${distX / 50}deg)`;
-        card.style.opacity = 1 - Math.abs(distX) / threshold;
+        card.style.opacity = 1 - Math.abs(distX) / (threshold*2);
     });
 
     card.addEventListener('touchend', () => {
@@ -333,8 +333,6 @@ function restoreCard(card) {
     console.log("apalapapa");
     
 }
-
-
 
 // Función para calcular el tiempo transcurrido
 function getTimeAgo(date) {
