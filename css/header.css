@@ -1,7 +1,7 @@
 /* Header styles */
 header {
     background-color: var(--primary-color);
-    color: white;
+    color: var(--header-text-color);
     padding: 30px 0;
     margin-bottom: 40px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
@@ -46,7 +46,7 @@ h1 {
     right: 20px;
     padding: 10px 20px;
     background-color: rgba(255, 255, 255, 0.15);
-    color: white;
+    color: var(--header-text-color);
     border: none;
     border-radius: 25px;
     cursor: pointer;
@@ -74,7 +74,7 @@ h1 {
 
 #colorModeSelect option {
     background-color: var(--primary-color);
-    color: white;
+    color: var(--header-text-color);
     padding: 10px;
 }
 

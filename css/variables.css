@@ -1,39 +1,41 @@
 :root {
-    --primary-color: #3498db;
+    --primary-color: #3498dba9;
     --secondary-color: #2c3e50;
-    --background-color: #ecf0f1;
+    --background-color: #f5f7fa;
     --card-background: #ffffff;
     --text-color: #333333;
     --card-background-rgb: 255, 255, 255;
-    --border-color: #dcdcdc; /* Nuevo */
-    --active-element-bg: #f0f0f0; /* Nuevo */
-    --hover-element-bg: #e7e7e7; /* Nuevo */
-    --subtext-color: #666666; /* Nuevo */
-    --scrollbar-track-color: #f1f1f1; /* Nuevo */
-    --scrollbar-thumb-color: #888888; /* Nuevo */
-    --scrollbar-thumb-hover-color: #555555; /* Nuevo */
-    --scrollbar-thumb-active-color: #333333; /* Nuevo */
+    --border-color: #dcdcdc;
+    --active-element-bg: #e6e9ed;
+    --hover-element-bg: #f0f2f5;
+    --subtext-color: #666666;
+    --scrollbar-track-color: #f1f1f1;
+    --scrollbar-thumb-color: #888888;
+    --scrollbar-thumb-hover-color: #555555;
+    --scrollbar-thumb-active-color: #333333;
+    --header-text-color: #ffffff; /* El fondo de este texto siempre es el primary-color para tener en cuenta que sea legible*/
 }
 
-/* Dark mode variables */
+/* Modo oscuro mejorado */
 .dark-mode {
-    --primary-color: #2980b9;
+    --primary-color: #3498db;
     --secondary-color: #34495e;
-    --background-color: #2c3e50;
-    --card-background: #34495e;
+    --background-color: #1a1f2c;
+    --card-background: #2c3e50;
     --text-color: #ecf0f1;
-    --card-background-rgb: 52, 73, 94;
-    --border-color: #2c3e50; /* Nuevo */
-    --active-element-bg: #2b3b4f; /* Nuevo */
-    --hover-element-bg: #2d4159; /* Nuevo */
-    --subtext-color: #ffffff; /* Nuevo */
-    --scrollbar-track-color: #222222; /* Nuevo */
-    --scrollbar-thumb-color: #555555; /* Nuevo */
-    --scrollbar-thumb-hover-color: #888888; /* Nuevo */
-    --scrollbar-thumb-active-color: #aaaaaa; /* Nuevo */
+    --card-background-rgb: 44, 62, 80;
+    --border-color: #34495e;
+    --active-element-bg: #3a506b;
+    --hover-element-bg: #415a77;
+    --subtext-color: #bdc3c7;
+    --scrollbar-track-color: #2c3e50;
+    --scrollbar-thumb-color: #34495e;
+    --scrollbar-thumb-hover-color: #415a77;
+    --scrollbar-thumb-active-color: #3a506b;
+    --header-text-color: #ffffff; /* El fondo de este texto siempre es el primary-color para tener en cuenta que sea legible*/
 }
 
-/* Set de colores estilo pastel */
+/* Colores pastel mejorados */
 .pastel-colors {
     --primary-color: #ffb3ba;
     --secondary-color: #ffdfba;
@@ -49,22 +51,24 @@
     --scrollbar-thumb-color: #888888;
     --scrollbar-thumb-hover-color: #555555;
     --scrollbar-thumb-active-color: #333333;
+    --header-text-color: #242424ec; /* El fondo de este texto siempre es el primary-color para tener en cuenta que sea legible*/
 }
 
-/* Set de colores estilo oscuro y vibrante */
+/* Colores oscuros y vibrantes mejorados */
 .vibrant-dark-colors {
-    --primary-color: #ff4081;
-    --secondary-color: #651fff;
-    --background-color: #212121;
-    --card-background: #424242;
+    --primary-color: #ff4757;
+    --secondary-color: #5352ed;
+    --background-color: #2f3542;
+    --card-background: #1e272e;
     --text-color: #ffffff;
-    --card-background-rgb: 66, 66, 66;
-    --border-color: #dcdcdc;
-    --active-element-bg: #2b2b2b;
-    --hover-element-bg: #333333;
-    --subtext-color: #cccccc;
-    --scrollbar-track-color: #222222;
-    --scrollbar-thumb-color: #555555;
-    --scrollbar-thumb-hover-color: #888888;
-    --scrollbar-thumb-active-color: #aaaaaa;
+    --card-background-rgb: 30, 39, 46;
+    --border-color: #3d3d3d;
+    --active-element-bg: #2d3436;
+    --hover-element-bg: #353b48;
+    --subtext-color: #d2dae2;
+    --scrollbar-track-color: #2f3542;
+    --scrollbar-thumb-color: #ff4757;
+    --scrollbar-thumb-hover-color: #5352ed;
+    --scrollbar-thumb-active-color: #ff6b6b;
+    --header-text-color: #ffffff; /* El fondo de este texto siempre es el primary-color para tener en cuenta que sea legible*/
 }
