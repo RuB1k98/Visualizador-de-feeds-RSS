@@ -99,3 +99,10 @@ h1 {
 #colorModeSelect:hover .color-mode-button {
     display: inline-block;
 }
+
+/* Media query for mobile devices se aplica cuando estoy en mobiles */
+@media screen and (max-width: 768px) {
+    header {
+        font-size: 0.8em;
+    }
+}
