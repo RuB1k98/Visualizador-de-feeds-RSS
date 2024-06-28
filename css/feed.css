@@ -9,14 +9,10 @@
     flex: 1;
     min-width: 0;
     background-color: var(--card-background);
+    width: 100%; /* Ensure full width */
 }
 
-/* Media query for mobile devices se aplica cuando estoy en mobiles */
-@media screen and (max-width: 768px) {
-    #feedsContainer {
-        padding: 0 0px;
-    }
-}
+
 
 /* Feed section styles */
 .feed-section {
@@ -43,7 +39,7 @@
 .feed-content {
     display: flex;
     flex-wrap: nowrap;
-    overflow-x: auto;
+    overflow-x: visible;
     padding-bottom: 20px;
     scroll-snap-type: none;
     gap: 20px;
@@ -132,4 +128,15 @@
 
 .feedItem button:last-child:hover {
     background-color: #c0392b;
+}
+
+/* Media query for mobile devices se aplica cuando estoy en mobiles */
+@media screen and (max-width: 768px) {
+    #feedsContainer {
+        padding: 0 0px;
+    }
+    .feed-section {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 }
