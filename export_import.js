@@ -78,3 +78,33 @@ async function handleImport() {
         alert(error.message);
     }
 }
+
+
+function CargarFeedsPorDefecto() {
+    const confirmacion = confirm('¿Estás seguro de que deseas cargar los feeds por defecto? Esto reemplazará los feeds actuales.');
+    if (confirmacion) {
+        fetch('./FeedsList.json') // Assuming the file is in the same directory as the JavaScript file
+            .then(response => response.json())
+            .then(data => {
+                // Validar que lo que se importa sea un arreglo de feeds
+                if (!Array.isArray(data)) {
+                    throw new Error('El archivo seleccionado no contiene un formato válido de feeds.');
+                }
+                // Actualizar los feeds en la aplicación
+                feeds = data;
+                // Guardar los feeds actualizados en localStorage
+                saveFeed();
+                // Limpiar y actualizar la interfaz
+                document.getElementById('feedsContainer').innerHTML = '';
+                updateCategories();
+                updateFeedList();
+                // Cargar nuevamente todos los feeds importados
+                feeds.forEach(feed => fetchFeed(feed.url, feed.title, feed.category));
+                alert('Feeds importados correctamente.');
+            })
+            .catch(error => {
+                console.error('Error al importar feeds:', error);
+                alert(error.message);
+            });
+    }
+}
