@@ -135,39 +135,44 @@ function createCardMobile(item, feedTitle) {
     const img = card.querySelector('.card-image');
     img.onerror = () => img.style.display = 'none';
 
-    // Añadir funcionalidad de swipe
+    addSwipeFunctionality(card);
+
+    return card;
+}
+
+function addSwipeFunctionality(card) {
     let startX;
     let startY;
     let distX;
     let distY;
     const threshold = 150; // Distancia mínima para considerar un swipe
-    
+
     card.addEventListener('touchstart', (e) => {
         const touch = e.touches[0];
         startX = touch.clientX;
         startY = touch.clientY;
     });
-    
+
     card.addEventListener('touchmove', (e) => {
         if (!startX || !startY) return;
-    
+
         const touch = e.touches[0];
         distX = touch.clientX - startX;
         distY = touch.clientY - startY;
-    
+
         // Si el movimiento horizontal es mayor que el vertical, prevenimos el scroll
         if (Math.abs(distX) > Math.abs(distY)) {
             e.preventDefault();
         }
-    
+
         card.style.transition = 'none';
-        card.style.transform = `translateX(${distX}px)`;
+        card.style.transform = `translateX(${distX}px) rotate(${distX / 50}deg)`;
         card.style.opacity = 1 - Math.abs(distX) / threshold;
     });
-    
+
     card.addEventListener('touchend', () => {
         card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
-        
+
         if (Math.abs(distX) >= threshold) {
             if (card.classList.contains('hiddencard')) {
                 restoreCard(card);
@@ -175,17 +180,14 @@ function createCardMobile(item, feedTitle) {
                 hideCard(card);
             }
         }
-        
+
         // Siempre volver a la posición original
         card.style.transform = '';
         card.style.opacity = '';
-        
+
         startX = null;
         startY = null;
     });
-    
-
-    return card;
 }
 
 
