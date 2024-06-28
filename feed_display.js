@@ -174,16 +174,28 @@ function addSwipeFunctionality(card) {
         card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
 
         if (Math.abs(distX) >= threshold) {
-            if (card.classList.contains('hiddencard')) {
-                restoreCard(card);
-            } else {
-                hideCard(card);
-            }
-        }
+            const direction = distX > 0 ? 1 : -1;
+            const finalX = direction * window.innerWidth;
+            
+            card.style.transform = `translateX(${finalX}px) rotate(${finalX / 50}deg)`;
+            card.style.opacity = '0';
 
-        // Siempre volver a la posición original
-        card.style.transform = '';
-        card.style.opacity = '';
+            // Esperar a que termine la animación antes de llamar a hideCard o restoreCard
+            setTimeout(() => {
+                if (card.classList.contains('hiddencard')) {
+                    restoreCard(card);
+                } else {
+                    hideCard(card);
+                }
+                // Resetear el estilo después de la animación
+                card.style.transform = '';
+                card.style.opacity = '';
+            }, 300); // 300ms es la duración de la transición
+        } else {
+            // Si no alcanza el umbral, volver a la posición original
+            card.style.transform = '';
+            card.style.opacity = '';
+        }
 
         startX = null;
         startY = null;
