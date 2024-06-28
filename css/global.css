@@ -17,6 +17,13 @@ body {
     box-sizing: border-box;
 }
 
+/* Media query for mobile devices se aplica cuando estoy en mobiles */
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 0 0px;
+    }
+}
+
 .content-wrapper {
     display: flex;
     gap: 20px;

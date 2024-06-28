@@ -7,9 +7,9 @@
     transition: transform 0.3s, box-shadow 0.3s;
     scroll-snap-align: start;
     position: relative;
-    min-width: 80%;  /* Cambiado de 250px a 80% */
-    max-width: 80%;  /* Cambiado de 250px a 80% */
-    width: 80%;      /* Añadido para asegurar el ancho */
+    min-width: 90%;  /* Cambiado de 250px a 80% */
+    max-width: 90%;  /* Cambiado de 250px a 80% */
+    width: 90%;      /* Añadido para asegurar el ancho */
     flex-shrink: 0;
     cursor: grab;
     user-select: none;
