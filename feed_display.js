@@ -145,7 +145,8 @@ function addSwipeFunctionality(card) {
     let startY;
     let distX;
     let distY;
-    const threshold = 150; // Distancia mínima para considerar un swipe
+    const threshold = 100; // Distancia mínima para considerar un swipe
+    const minMoveThreshold = 30; // Nuevo: Distancia mínima antes de que la tarjeta comience a moverse
 
     card.addEventListener('touchstart', (e) => {
         const touch = e.touches[0];
@@ -165,9 +166,13 @@ function addSwipeFunctionality(card) {
             e.preventDefault();
         }
 
-        card.style.transition = 'none';
-        card.style.transform = `translateX(${distX}px) rotate(${distX / 50}deg)`;
-        card.style.opacity = 1 - Math.abs(distX) / (threshold*2);
+        // Nuevo: Solo aplicamos transformaciones si el movimiento supera el umbral mínimo
+        if (Math.abs(distX) > minMoveThreshold) {
+            const moveX = distX - (distX > 0 ? minMoveThreshold : -minMoveThreshold);
+            card.style.transition = 'none';
+            card.style.transform = `translateX(${moveX}px) rotate(${moveX / 50}deg)`;
+            card.style.opacity = 1 - Math.abs(moveX) / (threshold*2);
+        }
     });
 
     card.addEventListener('touchend', () => {
@@ -180,17 +185,15 @@ function addSwipeFunctionality(card) {
             card.style.transform = `translateX(${finalX}px) rotate(${finalX / 50}deg)`;
             card.style.opacity = '0';
 
-            // Esperar a que termine la animación antes de llamar a hideCard o restoreCard
             setTimeout(() => {
                 if (card.classList.contains('hiddencard')) {
                     restoreCard(card);
                 } else {
                     hideCard(card);
                 }
-                // Resetear el estilo después de la animación
                 card.style.transform = '';
                 card.style.opacity = '';
-            }, 150); // 150ms es la duración de la transición
+            }, 150);
         } else {
             // Si no alcanza el umbral, volver a la posición original
             card.style.transform = '';
