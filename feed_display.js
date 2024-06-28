@@ -146,12 +146,14 @@ function addSwipeFunctionality(card) {
     let distX;
     let distY;
     const threshold = 100; // Distancia mínima para considerar un swipe
-    const minMoveThreshold = 30; // Nuevo: Distancia mínima antes de que la tarjeta comience a moverse
+    const minMoveThreshold = 20; // Distancia mínima antes de que la tarjeta comience a moverse
+    let isHorizontalSwipe = false; // Nueva variable para determinar si el swipe es horizontal
 
     card.addEventListener('touchstart', (e) => {
         const touch = e.touches[0];
         startX = touch.clientX;
         startY = touch.clientY;
+        isHorizontalSwipe = false; // Reiniciamos la variable al inicio de cada toque
     });
 
     card.addEventListener('touchmove', (e) => {
@@ -161,24 +163,29 @@ function addSwipeFunctionality(card) {
         distX = touch.clientX - startX;
         distY = touch.clientY - startY;
 
-        // Si el movimiento horizontal es mayor que el vertical, prevenimos el scroll
-        if (Math.abs(distX) > Math.abs(distY)) {
-            e.preventDefault();
+        // Determinamos si el movimiento es más horizontal que vertical
+        if (!isHorizontalSwipe) {
+            isHorizontalSwipe = Math.abs(distX) > Math.abs(distY);
         }
 
-        // Nuevo: Solo aplicamos transformaciones si el movimiento supera el umbral mínimo
-        if (Math.abs(distX) > minMoveThreshold) {
-            const moveX = distX - (distX > 0 ? minMoveThreshold : -minMoveThreshold);
-            card.style.transition = 'none';
-            card.style.transform = `translateX(${moveX}px) rotate(${moveX / 50}deg)`;
-            card.style.opacity = 1 - Math.abs(moveX) / (threshold*2);
+        // Solo prevenimos el scroll y aplicamos transformaciones si el swipe es horizontal
+        if (isHorizontalSwipe) {
+            e.preventDefault();
+
+            // Aplicamos transformaciones si el movimiento supera el umbral mínimo
+            if (Math.abs(distX) > minMoveThreshold) {
+                const moveX = distX - (distX > 0 ? minMoveThreshold : -minMoveThreshold);
+                card.style.transition = 'none';
+                card.style.transform = `translateX(${moveX}px) rotate(${moveX / 50}deg)`;
+                card.style.opacity = 1 - Math.abs(moveX) / (threshold*2);
+            }
         }
     });
 
     card.addEventListener('touchend', () => {
         card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
 
-        if (Math.abs(distX) >= threshold) {
+        if (isHorizontalSwipe && Math.abs(distX) >= threshold) {
             const direction = distX > 0 ? 1 : -1;
             const finalX = direction * window.innerWidth;
             
@@ -195,13 +202,14 @@ function addSwipeFunctionality(card) {
                 card.style.opacity = '';
             }, 150);
         } else {
-            // Si no alcanza el umbral, volver a la posición original
+            // Si no alcanza el umbral o no es un swipe horizontal, volver a la posición original
             card.style.transform = '';
             card.style.opacity = '';
         }
 
         startX = null;
         startY = null;
+        isHorizontalSwipe = false;
     });
 }
 
