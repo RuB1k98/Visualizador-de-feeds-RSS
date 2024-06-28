@@ -190,7 +190,7 @@ function addSwipeFunctionality(card) {
                 // Resetear el estilo después de la animación
                 card.style.transform = '';
                 card.style.opacity = '';
-            }, 300); // 300ms es la duración de la transición
+            }, 150); // 150ms es la duración de la transición
         } else {
             // Si no alcanza el umbral, volver a la posición original
             card.style.transform = '';
