@@ -18,6 +18,7 @@
 .feed-section {
     margin-left: 40px;
     margin-right: 40px;
+    overflow-x: auto;
 }
 
 /* Feed title styles */

@@ -69,7 +69,6 @@ function animateScroll(container) {
 function mouseMoveHandler(e, container) {
     if (!isDownX && !isDownY) return;
     e.preventDefault();
-
     const currentTime = Date.now();
     const currentTimeInSeconds = currentTime / 1000;
 
