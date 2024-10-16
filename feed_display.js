@@ -1,6 +1,6 @@
-// feed_display.js
-
-
+/**
+ * feed_display.js
+ */
 
 // Función asíncrona para obtener el feed RSS
 async function fetchFeed(url, title, category) {
@@ -54,6 +54,11 @@ function addDragEventListeners(element) {
     element.addEventListener('mouseleave', () => mouseLeaveHandler(element));
     element.addEventListener('mouseup', () => mouseUpHandler(element));
     element.addEventListener('mousemove', (e) => mouseMoveHandler(e, element));
+    element.addEventListener('click', (e) => { // P0e0e
+        if (preventClick) { // P0e0e
+            e.preventDefault(); // P0e0e
+        } // P0e0e
+    }); // P0e0e
 }
 
 // Función asíncrona para mostrar el feed

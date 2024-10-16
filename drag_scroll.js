@@ -1,3 +1,5 @@
+let preventClick = false;
+
 // Variables para el desplazamiento horizontal
 let isDownX = false;
 let startX;
@@ -28,6 +30,7 @@ function mouseDownHandler(e, container) {
     startY = e.pageY - container.offsetTop;
     scrollLeft = container.scrollLeft;
     scrollTop = container.scrollTop;
+    preventClick = false; // Pa8b6
 }
 
 // Manejador de evento cuando el ratón sale del contenedor
@@ -42,6 +45,10 @@ function mouseUpHandler(container) {
     isDownX = false;
     isDownY = false;
     container.classList.remove('active');
+
+    if (preventClick) { // P0c57
+        container.addEventListener('click', (e) => e.preventDefault(), { once: true });
+    }
 
     // Iniciar animación de desplazamiento si hay velocidad
     if (velocityX !== 0 || velocityY !== 0) {
@@ -81,6 +88,8 @@ function mouseMoveHandler(e, container) {
     const y = e.pageY - container.offsetTop;
     const walkY = (y - startY) * 0.9;
     container.scrollTop = scrollTop - walkY;
+
+    preventClick = true; // P48d6
 
     // Cálculo de velocidad para el eje X
     if (lastTimeX && lastX !== null) {
