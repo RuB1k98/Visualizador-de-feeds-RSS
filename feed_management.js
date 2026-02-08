@@ -1,30 +1,41 @@
 // feed_management.js
 
 // Función para añadir un nuevo feed
-function addFeed() {
+async function addFeed() {
     // Obtiene la URL y la categoría del nuevo feed de los inputs
     const newFeedUrl = document.getElementById('feedInput').value;
     const category = document.getElementById('categoryInput').value;
-    
+
     // Comprueba si la URL no está vacía y no existe ya en la lista de feeds
     if (newFeedUrl && !feeds.some(feed => feed.url === newFeedUrl)) {
         // Pide al usuario un título para el feed
         const feedTitle = prompt("Ingrese un título para este feed:", "Nuevo Feed");
-        
+
+        // Calculate originalIndex
+        const maxIndex = feeds.length > 0 ? Math.max(...feeds.map(f => f.originalIndex || 0)) : -1;
+
         // Crea un nuevo objeto feed y lo añade a la lista de feeds
-        const newFeed = { url: newFeedUrl, title: feedTitle || "Nuevo Feed", category: category };
+        const newFeed = {
+            url: newFeedUrl,
+            title: feedTitle || "Nuevo Feed",
+            category: category,
+            originalIndex: maxIndex + 1
+        };
         feeds.push(newFeed);
-        
+
         // Guarda los feeds actualizados (presumiblemente en localStorage)
         saveFeed();
-        
+
         // Limpia los inputs
         document.getElementById('feedInput').value = '';
         document.getElementById('categoryInput').value = '';
-        
+
         // Obtiene y muestra el nuevo feed
-        fetchFeed(newFeed.url, newFeed.title, newFeed.category);
-        
+        await fetchFeed(newFeed.url, newFeed.title, newFeed.category);
+
+        // Ordenar feeds y DOM
+        window.sortFeeds();
+
         // Actualiza las categorías y la lista de feeds en la UI
         updateCategories();
         updateFeedList();
@@ -38,33 +49,26 @@ function addFeed() {
 function modifyFeed(index) {
     // Obtiene el feed a modificar
     const feed = feeds[index];
-    
+
     // Pide al usuario el nuevo título y categoría
     const newTitle = prompt("Ingrese el nuevo título para este feed:", feed.title);
     const newCategory = prompt("Ingrese la nueva categoría para este feed:", feed.category);
-    
+
     // Actualiza el título si el usuario ingresó uno nuevo
     if (newTitle !== null) {
         feed.title = newTitle || feed.title;
     }
-    
+
     // Actualiza la categoría si el usuario ingresó una nueva
     if (newCategory !== null) {
         feed.category = newCategory;
     }
-    
+
     // Guarda los feeds actualizados
     saveFeed();
-    
-    // Limpia el contenedor de feeds
-    document.getElementById('feedsContainer').innerHTML = '';
-    
-    // Actualiza las categorías y la lista de feeds en la UI
-    updateCategories();
-    updateFeedList();
-    
-    // Vuelve a obtener y mostrar todos los feeds
-    feeds.forEach(feed => fetchFeed(feed.url, feed.title, feed.category));
+
+    // Recargar feeds para aplicar orden y cambios
+    loadFeeds();
 }
 
 // Función para eliminar un feed
@@ -73,19 +77,12 @@ function removeFeed(index) {
     if (confirm(`¿Estás seguro de que deseas eliminar el feed "${feeds[index].title}"?`)) {
         // Elimina el feed de la lista
         feeds.splice(index, 1);
-        
+
         // Guarda los feeds actualizados
         saveFeed();
-        
-        // Limpia el contenedor de feeds
-        document.getElementById('feedsContainer').innerHTML = '';
-        
-        // Actualiza las categorías y la lista de feeds en la UI
-        updateCategories();
-        updateFeedList();
-        
-        // Vuelve a obtener y mostrar todos los feeds
-        feeds.forEach(feed => fetchFeed(feed.url, feed.title, feed.category));
+
+        // Recargar feeds para aplicar orden y cambios
+        loadFeeds();
     }
 }
 
@@ -98,9 +95,9 @@ function updateFeedList() {
             <div id="feedItems"></div>
         </details>
     `;
-    
+
     const feedItems = document.getElementById('feedItems');
-    
+
     // Crea un elemento en la lista para cada feed
     feeds.forEach((feed, index) => {
         const feedItem = document.createElement('div');

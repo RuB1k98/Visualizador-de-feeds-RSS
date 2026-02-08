@@ -7,19 +7,19 @@ async function fetchFeed(url, title, category) {
     try {
         // Realiza una petición a la API de rss2json para convertir el RSS a JSON
         const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`);
-        
+
         // Comprueba si la respuesta es exitosa
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        
+
         // Convierte la respuesta a JSON
         const data = await response.json();
-        
+
         // Llama a la función para mostrar el feed
-        displayFeed(data, title, category, url);
+        await displayFeed(data, title, category, url);
     } catch (error) {
-                // Si hay un error, muestra un mensaje de error y lo registra en la consola
+        // Si hay un error, muestra un mensaje de error y lo registra en la consola
         const errorMessage = `Error cargando el feed "${title}". Por favor, inténtelo nuevamente.`;
         displayFeedError(errorMessage, url);
         console.error('Error fetching RSS feed:', error);
@@ -30,7 +30,7 @@ async function fetchFeed(url, title, category) {
 function displayFeedError(errorMessage, url) {
     // Busca todos los elementos con la clase 'feedItem'
     const feedItems = document.querySelectorAll('.feedItem');
-    
+
     // Recorre la lista de feeds
     for (let i = 0; i < feeds.length; i++) {
         // Si encuentra el feed con la URL correspondiente
@@ -39,7 +39,7 @@ function displayFeedError(errorMessage, url) {
             const errorElement = document.createElement('p');
             errorElement.classList.add('feed-error');
             errorElement.textContent = errorMessage;
-            
+
             // Inserta el mensaje de error antes del primer hijo de 'feed-actions'
             const feedActions = feedItems[i].querySelector('.feed-actions');
             feedActions.insertBefore(errorElement, feedActions.firstChild);
@@ -65,7 +65,7 @@ function addDragEventListeners(element) {
 async function displayFeed(data, feedTitle, category, url) {
     try {
         if (data.items && data.items.length > 0) {
-                displayFeedCentral(data, feedTitle, category, url);
+            displayFeedCentral(data, feedTitle, category, url);
         } else {
             const errorMessage = `El feed "${feedTitle}" no tiene artículos disponibles.`;
             displayFeedError(errorMessage, url);
@@ -97,14 +97,15 @@ function displayFeedCentral(data, feedTitle, category, url) {
     const feedSection = document.createElement('section');
     feedSection.className = 'feed-section';
     feedSection.setAttribute('data-category', category);
-    
+    feedSection.setAttribute('data-feed-url', url);
+
     feedSection.innerHTML = `
         <h2 class="feed-title">${feedTitle}</h2>
     `;
-    
+
     feedSection.appendChild(feedContent);
     feedsContainer.appendChild(feedSection);
-    
+
     addDragEventListeners(feedContent);
     hideCardsWithHiddenTitles(); // Ocultar tarjetas con títulos ocultos
 }
@@ -182,7 +183,7 @@ function addSwipeFunctionality(card) {
                 const moveX = distX - (distX > 0 ? minMoveThreshold : -minMoveThreshold);
                 card.style.transition = 'none';
                 card.style.transform = `translateX(${moveX}px) rotate(${moveX / 50}deg)`;
-                card.style.opacity = 1 - Math.abs(moveX) / (threshold*2);
+                card.style.opacity = 1 - Math.abs(moveX) / (threshold * 2);
             }
         }
     });
@@ -193,7 +194,7 @@ function addSwipeFunctionality(card) {
         if (isHorizontalSwipe && Math.abs(distX) >= threshold) {
             const direction = distX > 0 ? 1 : -1;
             const finalX = direction * window.innerWidth;
-            
+
             card.style.transform = `translateX(${finalX}px) rotate(${finalX / 50}deg)`;
             card.style.opacity = '0';
 
@@ -259,7 +260,7 @@ function createCard(item, feedTitle) {
 function createHiddenCardsSection() {
     const feedsContainer = document.getElementById('feedsContainer');
     let hiddenSection = document.getElementById('hiddenCardsSection');
-    
+
     if (!hiddenSection) {
         hiddenSection = document.createElement('section');
         hiddenSection.id = 'hiddenCardsSection';
@@ -270,12 +271,12 @@ function createHiddenCardsSection() {
             <div class="hidden-cards-container feed-content"></div>
         `;
         feedsContainer.appendChild(hiddenSection);
-        
+
         // Añadir event listeners de arrastre al contenedor de tarjetas ocultas
         const hiddenCardsContainer = hiddenSection.querySelector('.hidden-cards-container');
         addDragEventListeners(hiddenCardsContainer);
     }
-    
+
     return hiddenSection;
 }
 
@@ -284,25 +285,25 @@ function createHiddenCardsSection() {
 function hideCard(card) {
     const hiddenSection = createHiddenCardsSection();
     const hiddenCardsContainer = hiddenSection.querySelector('.hidden-cards-container');
-    
+
     // Añadir la clase 'hiddencard' a la tarjeta
     card.classList.add('hiddencard');
-    
+
     // Remover la tarjeta de su posición actual
     card.parentNode.removeChild(card);
-    
+
     // Añadir la tarjeta a la sección de tarjetas ocultas
     hiddenCardsContainer.appendChild(card);
-    
+
     // Mostrar la sección de tarjetas ocultas si estaba oculta
     hiddenSection.style.display = 'block';
-    
+
     // Cambiar el evento del botón de cerrar para restaurar la tarjeta cuando la tarjeta no es mobile
-    if(!isMobile()){
-    const closeBtn = card.querySelector('.card-close-btn');
-    closeBtn.innerHTML = '&#8634;'; // Cambiar el símbolo a un ícono de restaurar
-    closeBtn.removeEventListener('click', () => hideCard(card));
-    closeBtn.addEventListener('click', () => restoreCard(card));
+    if (!isMobile()) {
+        const closeBtn = card.querySelector('.card-close-btn');
+        closeBtn.innerHTML = '&#8634;'; // Cambiar el símbolo a un ícono de restaurar
+        closeBtn.removeEventListener('click', () => hideCard(card));
+        closeBtn.addEventListener('click', () => restoreCard(card));
     }
 
     // Guardar el título de la tarjeta en el localstorage si no existe previamente
@@ -324,30 +325,30 @@ function restoreCard(card) {
     const hiddenSection = document.getElementById('hiddenCardsSection');
     const hiddenCardsContainer = hiddenSection.querySelector('.hidden-cards-container');
     card.classList.remove('hiddencard');
-    
+
     if (!isMobile()) {
         const closeBtn = card.querySelector('.card-close-btn');
         closeBtn.innerHTML = '&times;';
         closeBtn.removeEventListener('click', () => restoreCard(card));
         closeBtn.addEventListener('click', () => hideCard(card));
     }
-    
+
     const originalFeed = card.getAttribute('data-original-feed');
-    const originalSection = Array.from(feedsContainer.children).find(section => 
+    const originalSection = Array.from(feedsContainer.children).find(section =>
         section.querySelector('.feed-title').textContent === originalFeed
     );
-    
+
     if (originalSection) {
         const feedContent = originalSection.querySelector('.feed-content');
         feedContent.appendChild(card);
     } else {
         feedsContainer.insertBefore(card, hiddenSection);
     }
-    
+
     if (hiddenCardsContainer.children.length === 0) {
         hiddenSection.style.display = 'none';
     }
-    
+
     filterFeeds();
     console.log("apalapapa");
     // Remover el título de la tarjeta de TitulosOcultos
@@ -359,14 +360,14 @@ function restoreCard(card) {
     console.log(card.querySelector('h3').textContent);
     console.log(hiddenTitles);
     console.log("apalapapa");
-    
+
 }
 
 // Función para calcular el tiempo transcurrido
 function getTimeAgo(date) {
     const now = new Date();
     const diffInSeconds = Math.floor((now - date) / 1000);
-    
+
     const intervals = {
         año: 31536000,
         mes: 2592000,
@@ -375,14 +376,14 @@ function getTimeAgo(date) {
         hora: 3600,
         minuto: 60
     };
-    
+
     for (const [unit, secondsInUnit] of Object.entries(intervals)) {
         const interval = Math.floor(diffInSeconds / secondsInUnit);
         if (interval >= 1) {
             return `Hace ${interval} ${unit}${interval > 1 ? (unit === 'mes' ? 'es' : 's') : ''}`;
         }
     }
-    
+
     return 'Hace un momento';
 }
 

@@ -1,0 +1,86 @@
+/* Settings Container */
+#settingsContainer {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10000;
+}
+
+/* Settings Button - styled to match colorModeSelect class */
+#settingsButton {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: var(--header-text-color);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#settingsButton:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: rotate(90deg);
+}
+
+/* Settings Menu Dropdown */
+.settings-menu {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    background-color: var(--card-background);
+    color: var(--text-color);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    min-width: 220px;
+    z-index: 10001;
+    animation: fadeIn 0.15s ease-out;
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.settings-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.settings-label {
+    font-weight: 600;
+    font-size: 0.9em;
+    color: var(--text-color);
+}
+
+#settingsMenu select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: var(--active-element-bg);
+    color: var(--text-color);
+    font-size: 0.95em;
+    outline: none;
+    transition: border-color 0.3s;
+    width: 100%;
+    cursor: pointer;
+}
+
+#settingsMenu select:focus {
+    border-color: var(--primary-color);
+}

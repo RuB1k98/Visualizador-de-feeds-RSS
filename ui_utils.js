@@ -61,7 +61,13 @@ function updateCategories() {
         checkbox.type = 'checkbox';
         checkbox.id = `category-${category}`;
         checkbox.value = category;
-        checkbox.checked = category !== 'Tarjetas ocultas'; // Set the checkbox to unchecked for 'Tarjetas ocultas'
+
+        const savedCategories = JSON.parse(localStorage.getItem('selectedCategories'));
+        if (savedCategories) {
+            checkbox.checked = savedCategories.includes(category);
+        } else {
+            checkbox.checked = category !== 'Tarjetas ocultas'; // Set the checkbox to unchecked for 'Tarjetas ocultas'
+        }
         checkbox.addEventListener('change', filterFeeds);
 
         const label = document.createElement('label');
@@ -72,7 +78,7 @@ function updateCategories() {
         categoryFilters.appendChild(label);
     });
 
-    document.getElementById('selectAll').addEventListener('change', function() {
+    document.getElementById('selectAll').addEventListener('change', function () {
         const isChecked = this.checked;
         document.querySelectorAll('#categoryFilters input[type="checkbox"]:not(#selectAll)').forEach(checkbox => {
             checkbox.checked = isChecked;
